@@ -14,3 +14,5 @@ option = st.selectbox(
 if st.button("Enviar"):
     if option == arboles:
         switch_page("arboles")
+    if option == grafos:
+        switch_page("grafos")
