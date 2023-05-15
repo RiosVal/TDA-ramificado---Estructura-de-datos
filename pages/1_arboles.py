@@ -1,6 +1,9 @@
 import streamlit as st
 from codigos.arboles.arboles import *
 from codigos.arboles.rbTree import *
+from codigos.arboles.aplicacionHuffman import uso_huffman
+from codigos.arboles.implementacionArbolesBinariosBusqueda import *
+from codigos.arboles.implementacionAVL import *
 
 def intro():
     st.header("🌳")
@@ -138,6 +141,50 @@ def usos():
         Estos árboles se utilizan para construir modelos predictivos basados en reglas de decisión.
         """
     )
+    st.subheader('_Códigos de Huffman_')
+    st.write(
+        '''El código de Huffman se utiliza para comprimir datos sin pérdida y reducir el tamaño de los datos mediante la eliminación de 
+        redundancias en la información. La idea principal detrás del código de Huffman es asignar códigos más cortos a los caracteres 
+        que aparecen con más frecuencia en el conjunto de datos, y códigos más largos a los caracteres que aparecen con menos frecuencia. 
+        Al hacerlo, se reduce el número total de bits necesarios para representar los datos, lo que reduce el tamaño del archivo.'''
+    )
+    st.write(
+        '''El código de Huffman se utiliza en una amplia variedad de aplicaciones, como la compresión de imágenes, audio y vídeo, y en la 
+        transmisión de datos a través de redes de comunicaciones. También se utiliza en la compresión de datos de almacenamiento, 
+        como en los archivos ZIP y RAR, que comprimen múltiples archivos en un solo archivo para ahorrar espacio de almacenamiento.'''
+    )
+    option = st.selectbox(
+        "Selecciona la opción 'Huffman' para mostrar el código",
+        ('-', 'Huffman')
+    )
+    if st.button('Mostrar'):
+        if option == 'Huffman':
+            codigo_huffman()
+    st.subheader('_Aplicación del código de Huffman_')    
+    uso_huffman()
+    st.header('Árboles de búsqueda')
+    st.write(
+        '''Los árboles de búsqueda binarios son utilizados para buscar y recuperar información de manera 
+        eficiente, se utilizan comúnmente en la implementación de bases de datos, la indexación de archivos 
+        y la búsqueda de elementos en aplicaciones de búsqueda. También son utilizados en algoritmos de 
+        ordenamiento y en la implementación de estructuras de datos como colas de prioridad y conjuntos'''
+    )
+    arbol_busqueda = insertar_nodos()
+    buscar_eliminar_nodo(arbol_busqueda)
+    arbol_busqueda.graficar()
+    st.header('Árboles de búsqueda avanzados (AVL)')
+    st.write(
+        '''AVL es una estructura de datos de árbol binario de búsqueda balanceado. En un árbol AVL, la diferencia de altura entre los 
+        subárboles izquierdo y derecho de cada nodo es como máximo uno, lo que garantiza que el árbol esté siempre balanceado, este 
+        modelo es útil en situaciones en las que es necesario mantener los elementos ordenados y se desea reducir la complejidad temporal 
+        de las operaciones en el árbol. Por ejemplo, se puede utilizar en bases de datos para almacenar y ordenar registros, en motores de 
+        búsqueda para indexar y clasificar resultados, en compiladores para optimizar el análisis sintáctico y semántico, y en muchas 
+        otras aplicaciones.'''
+    )
+    hola()
+
+
+
 
 intro()
 importante_saber()
