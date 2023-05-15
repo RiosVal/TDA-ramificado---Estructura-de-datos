@@ -1,5 +1,7 @@
 import streamlit as st
 import numpy as np
+import networkx as nx
+import matplotlib.pyplot as plt
 from codigos.grafos.rbGraphs import *
 
 
@@ -429,82 +431,114 @@ class GrafoComunicacion:
 
 
 
-#-------
-
-
-
-
-
 def in_adya():
-    st.subheader("Matriz de adyacencia")
-    # Pide al usuario el número de nodos del grafo
+    st.subheader("Matriz adyacencia")
     n = st.number_input("Ingrese el número de nodos del grafo", min_value=1, max_value=10, step=1)
 
-    # Crea una matriz de adyacencia vacía
+ 
     matriz = np.zeros((n, n))
 
-    # Agrega los campos de entrada para cada elemento de la matriz
+   
     for i in range(n):
         for j in range(n):
-            # Crea un campo de entrada numérica para cada elemento de la matriz
+            
             key = f"matriz-{i}-{j}"
             valor = st.number_input(f"Elemento ({i}, {j})", key=key)
-            # Agrega el valor del elemento a la matriz
+            
             matriz[i, j] = valor
 
-    # Muestra la matriz en pantalla
+   
     st.write("Matriz de adyacencia:")
     st.write(matriz)
+
+    
+    grafo = nx.from_numpy_array(matriz)
+
+    
+    plt.figure(figsize=(6, 4))
+    nx.draw(grafo, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
+    plt.title("Grafo")
+    plt.axis('off')
+    st.pyplot(plt)
 
 if __name__ == "__main__":
     in_adya()
 
 
-
 def in_vec():
-    st.subheader("Matriz de un vector")
-    # Pide al usuario el tamaño del vector
+    st.subheader("Matriz vector")
+   
     n = st.number_input("Ingrese el tamaño del vector", min_value=1, max_value=10, step=1)
 
-    # Crea un vector vacío de tamaño n
-    vector = np.zeros(n, dtype=int)
+   
+    vector = []
 
-    # Agrega los campos de entrada para cada elemento del vector
+    
     for i in range(n):
-        # Crea un campo de entrada numérica para cada elemento del vector
+        
         key = f"vector-{i}"
-        valor = st.number_input(f"Elemento {i}", key=key, value=vector[i])
-        # Actualiza el valor del elemento en el vector
-        vector[i] = valor
+        valor = st.number_input(f"Elemento {i}", key=key)
+       
+        vector.append(valor)
 
-    # Muestra el vector en pantalla
+  
     st.write("Vector:")
     st.write(vector)
 
-#if __name__ == "__main__":
-    #main()
-
-
-
-def in_lis():
-    st.subheader("Matriz de una lista")
-    # Pide al usuario el tamaño de la lista
-    n = st.number_input("Ingrese el tamaño de la lista", min_value=1, max_value=10, step=1)
-
-    # Crea una lista vacía
-    lista = []
-
-    # Agrega los campos de entrada para cada elemento de la lista
+   
+    grafo = nx.Graph()
+    grafo.add_nodes_from(range(n))
     for i in range(n):
-        # Crea un campo de entrada de texto para cada elemento de la lista
-        key = f"lista-{i}"
-        valor = st.text_input(f"Elemento {i}", key=key)
-        # Agrega el valor del elemento a la lista
-        lista.append(valor)
+        for j in range(i+1, n):
+            if vector[i] == vector[j]:
+                grafo.add_edge(i, j)
 
-    # Muestra la lista en pantalla
-    st.write("Lista:")
-    st.write(lista)
+    
+    plt.figure(figsize=(6, 4))
+    nx.draw(grafo, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
+    plt.title("Grafo")
+    plt.axis('off')
+    st.pyplot(plt)
 
-#if __name__ == "__main__":
-    #hola()
+if __name__ == "__main__":
+    in_vec()
+
+
+
+def in_matriz():
+    st.subheader("Mattriz lista")
+    n = st.number_input("Ingrese el tamaño de la matriz", min_value=1, max_value=10, step=1)
+
+
+    matriz = [[] for _ in range(n)]
+
+   
+    for i in range(n):
+        for j in range(n):
+         
+            valor = st.number_input(f"Elemento ({i}, {j})")
+   
+            matriz[i].append(valor)
+
+ 
+    st.write("Matriz:")
+    for row in matriz:
+        st.write(row)
+
+    
+    grafo = nx.Graph()
+    grafo.add_nodes_from(range(n))
+    for i in range(n):
+        for j in matriz[i]:
+            if j != 0:
+                grafo.add_edge(i, j)
+
+
+    plt.figure(figsize=(6, 4))
+    nx.draw(grafo, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
+    plt.title("Grafo")
+    plt.axis('off')
+    st.pyplot(plt)
+
+if __name__ == "__main__":
+    in_matriz()
