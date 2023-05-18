@@ -10,17 +10,17 @@ class Nodo:
         self.derecha = None
 
 # Definición de la clase ÁrbolBinario
-class ÁrbolBinario:
+class ArbolBinario:
     def __init__(self):
-        self.raíz = None
+        self.raiz = None
 
     # Función para insertar un nuevo nodo en el árbol
     def insertar(self, valor):
         nuevo_nodo = Nodo(valor)
-        if self.raíz is None:
-            self.raíz = nuevo_nodo
+        if self.raiz is None:
+            self.raiz = nuevo_nodo
         else:
-            actual = self.raíz
+            actual = self.raiz
             while True:
                 if valor < actual.valor:
                     if actual.izquierda is None:
@@ -37,10 +37,10 @@ class ÁrbolBinario:
 
     # Función para buscar un valor en el árbol
     def buscar(self, valor):
-        if self.raíz is None:
+        if self.raiz is None:
             return False
         else:
-            actual = self.raíz
+            actual = self.raiz
             while actual is not None:
                 if valor == actual.valor:
                     return True
@@ -52,12 +52,12 @@ class ÁrbolBinario:
 
 
     def eliminar(self, valor):
-        if self.raíz is None:
+        if self.raiz is None:
             return False
         else:
             # Buscar el nodo a eliminar
             encontrado = False
-            actual = self.raíz
+            actual = self.raiz
             padre = None
             while actual and not encontrado:
                 if valor == actual.valor:
@@ -80,7 +80,7 @@ class ÁrbolBinario:
                     else:
                         padre.derecha = None
                 else:
-                    self.raíz = None
+                    self.raiz = None
             
             # Caso 2: el nodo a eliminar tiene un solo hijo
             elif actual.izquierda is None:
@@ -90,7 +90,7 @@ class ÁrbolBinario:
                     else:
                         padre.derecha = actual.derecha
                 else:
-                    self.raíz = actual.derecha
+                    self.raiz = actual.derecha
             
             elif actual.derecha is None:
                 if padre is not None:
@@ -99,7 +99,7 @@ class ÁrbolBinario:
                     else:
                         padre.derecha = actual.izquierda
                 else:
-                    self.raíz = actual.izquierda
+                    self.raiz = actual.izquierda
             
             # Caso 3: el nodo a eliminar tiene dos hijos
             else:
@@ -143,4 +143,4 @@ class ÁrbolBinario:
                 plt.axis('off')
                 st.pyplot(plt.gcf())
 
-        graficar_arbol(self.raíz)
+        graficar_arbol(self.raiz)

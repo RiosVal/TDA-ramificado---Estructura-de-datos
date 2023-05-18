@@ -14,11 +14,10 @@ def intro():
         que los almacenan en forma lineal.
         """,
     )
-    
-    st.header(":green[Importante entender]")
-    st.write("""Los árboles se componen de los siguientes elementos:""")
 
 def importante_saber():
+    st.header(":green[Importante entender]")
+    st.write("""Los árboles se componen de los siguientes elementos:""")
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -59,17 +58,107 @@ def tabs():
     with tab4:
         st.image("images/arboles/padreHermanos.png")
 
-def tipos():
-    st.header('Tipos')
-    col1, col2 = st.columns(2)
+def n_arios():
+    st.subheader('Árbol n-ario')
+    st.write("Aquellos arboles donde el número máximo de hijos por nodo es de N.")
 
-    with col1:
-        st.subheader('Árbol n-ario')
-        st.markdown("Aquellos arboles donde el número máximo de hijos por nodo es de N.", unsafe_allow_html=True)
-    with col2:
-        st.subheader('Árbol binario')
-        st.markdown("Árbol n-ario de Grado 2, cada nodo solo puede tener máximo 2 hijos.", unsafe_allow_html=True)
-    
+def reglas_binarios():
+    st.header("Reglas de los árboles binarios")
+    st.markdown(
+        """
+            - Siempre va a haber un nodo raiz
+            - Los datos menores o iguales a la raíz van a la izquierda
+            - Los datos mayores van a la derecha de la raíz
+        """ 
+    )
+
+def binarios():
+    st.subheader('Árbol binario')
+    st.write("Árbol n-ario de Grado 2, cada nodo solo puede tener máximo 2 hijos.")
+
+def codigos_huffman():
+    st.subheader('_Códigos de Huffman_')
+    st.write(
+        '''El código de Huffman se utiliza para comprimir datos sin pérdida y reducir el tamaño de los datos mediante la eliminación de 
+        redundancias en la información. La idea principal detrás del código de Huffman es asignar códigos más cortos a los caracteres 
+        que aparecen con más frecuencia en el conjunto de datos, y códigos más largos a los caracteres que aparecen con menos frecuencia. 
+        Al hacerlo, se reduce el número total de bits necesarios para representar los datos, lo que reduce el tamaño del archivo.'''
+    )
+    st.write(
+        '''El código de Huffman se utiliza en una amplia variedad de aplicaciones, como la compresión de imágenes, audio y vídeo, y en la 
+        transmisión de datos a través de redes de comunicaciones. También se utiliza en la compresión de datos de almacenamiento, 
+        como en los archivos ZIP y RAR, que comprimen múltiples archivos en un solo archivo para ahorrar espacio de almacenamiento.'''
+    )
+    option = st.selectbox(
+        "Selecciona la opción 'Huffman' para mostrar el código",
+        ('-', 'Huffman')
+    )
+    if st.button('Mostrar'):
+        if option == 'Huffman':
+            codigo_huffman()
+    st.subheader('_Aplicación del código de Huffman_')    
+    uso_huffman()
+
+def usos_binarios():
+    st.header('Usos')
+    st.markdown(
+        """
+        - Estructuras datos: para almacenar y organizar información de manera eficiente. Los árboles binarios de búsqueda, 
+        los árboles AVL y los árboles B son ejemplos de estructuras de datos basadas en árboles que permiten realizar 
+        operaciones de búsqueda, inserción y eliminación de manera eficiente.
+        - Búsqueda y recuperación de información: Los árboles se utilizan en algoritmos de búsqueda y recuperación de 
+        información. Los árboles de búsqueda binarios y los árboles de búsqueda equilibrados como el árbol B son útiles 
+        para realizar búsquedas eficientes en grandes conjuntos de datos.
+        - Compresión de datos: Los árboles se utilizan en algoritmos de compresión de datos, como el árbol de Huffman, 
+        que permite la compresión de datos sin pérdida. Estos árboles asignan códigos de longitud variable a los símbolos 
+        de entrada, asignando códigos más cortos a los símbolos más frecuentes y códigos más largos a los menos frecuentes.
+        - Análisis y optimización de algoritmos: Los árboles se utilizan para analizar y optimizar el rendimiento de algoritmos. 
+        Por ejemplo, el análisis del árbol de recursión se utiliza para determinar la complejidad y eficiencia de algoritmos recursivos.
+        - Estructuras de representación y organización: Los árboles se utilizan para representar y organizar estructuras jerárquicas 
+        en diversas aplicaciones. Por ejemplo, los árboles se utilizan para representar la estructura de directorios en un sistema de 
+        archivos, la estructura de una página web, la jerarquía de categorías en un sistema de gestión de contenidos, entre otros.
+        - Inteligencia artificial y aprendizaje automático: Los árboles de decisión y los bosques aleatorios (random forests) 
+        se utilizan en aplicaciones de inteligencia artificial y aprendizaje automático para la clasificación y toma de decisiones. 
+        Estos árboles se utilizan para construir modelos predictivos basados en reglas de decisión.
+        """
+    )
+    codigos_huffman()
+    st.subheader('Árboles de búsqueda')
+    st.write(
+        '''Los árboles de búsqueda binarios son utilizados para buscar y recuperar información de manera 
+        eficiente, se utilizan comúnmente en la implementación de bases de datos, la indexación de archivos 
+        y la búsqueda de elementos en aplicaciones de búsqueda. También son utilizados en algoritmos de 
+        ordenamiento y en la implementación de estructuras de datos como colas de prioridad y conjuntos'''
+    )
+    arbol_busqueda = insertar_nodos()
+    buscar_eliminar_nodo(arbol_busqueda)
+    arbol_busqueda.graficar()
+
+def binarios_busqueda():
+    st.header('Árboles binarios de búsqueda')
+    st.write(
+        '''
+            Los árboles de búsqueda binarios son utilizados para buscar y recuperar información de manera eficiente, se utilizan comúnmente 
+            en la implementación de bases de datos, la indexación de archivos y la búsqueda de elementos en aplicaciones de búsqueda. 
+            También son utilizados en algoritmos de ordenamiento y en la implementación de estructuras de datos como colas de 
+            prioridad y conjuntos
+        '''
+    )
+    usos_binarios()
+
+def arbolesAVL():
+    st.header('Árboles de búsqueda avanzados (AVL)')
+    st.write(
+        '''AVL es una estructura de datos de árbol binario de búsqueda balanceado. En un árbol AVL, la diferencia de altura entre los 
+        subárboles izquierdo y derecho de cada nodo es como máximo uno, lo que garantiza que el árbol esté siempre balanceado, este 
+        modelo es útil en situaciones en las que es necesario mantener los elementos ordenados y se desea reducir la complejidad temporal 
+        de las operaciones en el árbol. Por ejemplo, se puede utilizar en bases de datos para almacenar y ordenar registros, en motores de 
+        búsqueda para indexar y clasificar resultados, en compiladores para optimizar el análisis sintáctico y semántico, y en muchas 
+        otras aplicaciones.'''
+    )
+    hola()
+
+def rojo_negro():
     st.header('Árboles rojo negro')
     st.write(
         '''
@@ -99,16 +188,35 @@ def tipos():
     st.subheader('_Inserción_')
     insertar_nodos_rbTree()
 
-def reglas_binarios():
-    st.header("Reglas de los árboles binarios")
-    st.markdown(
-        """
-            - Siempre va a haber un nodo raiz
-            - Los datos menores o iguales a la raíz van a la izquierda
-            - Los datos mayores van a la derecha de la raíz
-        """ 
+def tipos():
+    st.header('Tipos')
+    col1, col2 = st.columns(2)
+
+    with col1:
+        n_arios()
+    with col2:
+        binarios()
+    
+    reglas_binarios()
+    code_binary_tree()
+    
+    opcion = st.selectbox(
+        'Otros tipos de árboles',
+        (
+            ' ',
+            'Árboles binarios de búsqueda',
+            'Árboles de búsqueda avanzados (AVL)',
+            'Árboles rojo negro'
+        )
     )
 
+    if opcion == 'Árboles binarios de búsqueda':
+        binarios_busqueda()
+    elif opcion == 'Árboles de búsqueda avanzados (AVL)':
+        arbolesAVL()
+    elif opcion == 'Árboles rojo negro':
+        rojo_negro()
+    
 def ejercicios_basicos():
     st.header("Ejercicios")
     st.write("""A continuación te mostraremos ejercicios para que apliques lo aprendido, la solución se muestra una vez indiques en el botón
@@ -118,81 +226,27 @@ def ejercicios_basicos():
     ejercicio2()
     ejercicio3()
 
-def usos():
-    st.header('Usos')
-    st.markdown(
-        """
-        - Estructuras datos: para almacenar y organizar información de manera eficiente. Los árboles binarios de búsqueda, 
-        los árboles AVL y los árboles B son ejemplos de estructuras de datos basadas en árboles que permiten realizar 
-        operaciones de búsqueda, inserción y eliminación de manera eficiente.
-        - Búsqueda y recuperación de información: Los árboles se utilizan en algoritmos de búsqueda y recuperación de 
-        información. Los árboles de búsqueda binarios y los árboles de búsqueda equilibrados como el árbol B son útiles 
-        para realizar búsquedas eficientes en grandes conjuntos de datos.
-        - Compresión de datos: Los árboles se utilizan en algoritmos de compresión de datos, como el árbol de Huffman, 
-        que permite la compresión de datos sin pérdida. Estos árboles asignan códigos de longitud variable a los símbolos 
-        de entrada, asignando códigos más cortos a los símbolos más frecuentes y códigos más largos a los menos frecuentes.
-        - Análisis y optimización de algoritmos: Los árboles se utilizan para analizar y optimizar el rendimiento de algoritmos. 
-        Por ejemplo, el análisis del árbol de recursión se utiliza para determinar la complejidad y eficiencia de algoritmos recursivos.
-        - Estructuras de representación y organización: Los árboles se utilizan para representar y organizar estructuras jerárquicas 
-        en diversas aplicaciones. Por ejemplo, los árboles se utilizan para representar la estructura de directorios en un sistema de 
-        archivos, la estructura de una página web, la jerarquía de categorías en un sistema de gestión de contenidos, entre otros.
-        - Inteligencia artificial y aprendizaje automático: Los árboles de decisión y los bosques aleatorios (random forests) 
-        se utilizan en aplicaciones de inteligencia artificial y aprendizaje automático para la clasificación y toma de decisiones. 
-        Estos árboles se utilizan para construir modelos predictivos basados en reglas de decisión.
-        """
+def page():
+    intro()
+    opcion = st.selectbox(
+        'Escoge el tema a desplegar',
+        (
+            '',
+            'Definiciones importantes',
+            'Tipos de árboles',
+            'Ejercicios básicos de comprensión',
+            'Ejercicio de aplicación'
+        )
     )
-    st.subheader('_Códigos de Huffman_')
-    st.write(
-        '''El código de Huffman se utiliza para comprimir datos sin pérdida y reducir el tamaño de los datos mediante la eliminación de 
-        redundancias en la información. La idea principal detrás del código de Huffman es asignar códigos más cortos a los caracteres 
-        que aparecen con más frecuencia en el conjunto de datos, y códigos más largos a los caracteres que aparecen con menos frecuencia. 
-        Al hacerlo, se reduce el número total de bits necesarios para representar los datos, lo que reduce el tamaño del archivo.'''
-    )
-    st.write(
-        '''El código de Huffman se utiliza en una amplia variedad de aplicaciones, como la compresión de imágenes, audio y vídeo, y en la 
-        transmisión de datos a través de redes de comunicaciones. También se utiliza en la compresión de datos de almacenamiento, 
-        como en los archivos ZIP y RAR, que comprimen múltiples archivos en un solo archivo para ahorrar espacio de almacenamiento.'''
-    )
-    option = st.selectbox(
-        "Selecciona la opción 'Huffman' para mostrar el código",
-        ('-', 'Huffman')
-    )
-    if st.button('Mostrar'):
-        if option == 'Huffman':
-            codigo_huffman()
-    st.subheader('_Aplicación del código de Huffman_')    
-    uso_huffman()
-    st.header('Árboles de búsqueda')
-    st.write(
-        '''Los árboles de búsqueda binarios son utilizados para buscar y recuperar información de manera 
-        eficiente, se utilizan comúnmente en la implementación de bases de datos, la indexación de archivos 
-        y la búsqueda de elementos en aplicaciones de búsqueda. También son utilizados en algoritmos de 
-        ordenamiento y en la implementación de estructuras de datos como colas de prioridad y conjuntos'''
-    )
-    arbol_busqueda = insertar_nodos()
-    buscar_eliminar_nodo(arbol_busqueda)
-    arbol_busqueda.graficar()
-    st.header('Árboles de búsqueda avanzados (AVL)')
-    st.write(
-        '''AVL es una estructura de datos de árbol binario de búsqueda balanceado. En un árbol AVL, la diferencia de altura entre los 
-        subárboles izquierdo y derecho de cada nodo es como máximo uno, lo que garantiza que el árbol esté siempre balanceado, este 
-        modelo es útil en situaciones en las que es necesario mantener los elementos ordenados y se desea reducir la complejidad temporal 
-        de las operaciones en el árbol. Por ejemplo, se puede utilizar en bases de datos para almacenar y ordenar registros, en motores de 
-        búsqueda para indexar y clasificar resultados, en compiladores para optimizar el análisis sintáctico y semántico, y en muchas 
-        otras aplicaciones.'''
-    )
-    hola()
+    if opcion == 'Definiciones importantes':
+        importante_saber()
+        tabs()
+    elif opcion == 'Tipos de árboles':
+        tipos()
+    elif opcion == 'Ejercicios básicos de comprensión':
+        ejercicios_basicos()
+    elif opcion == 'Ejercicio de aplicación':
+        st.write('EJERCICIO AQUÍ')
 
+page()
 
-
-
-intro()
-importante_saber()
-tabs()
-tipos()
-usos()
-st.divider()
-reglas_binarios()
-code_binary_tree()
-st.divider()
-ejercicios_basicos()
