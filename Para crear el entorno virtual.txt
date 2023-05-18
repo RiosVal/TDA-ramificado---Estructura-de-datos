@@ -1,0 +1,11 @@
+Para crear el entorno virtual:
+1.py -m venv venv
+2.cd "C:\Users\jcast\Documents\estrcutura_datos"
+Abrir el entorno virtual 
+venv\Scripts\activate.bat
+
+Intalar las dependencias:pip install streamlit, pip isntall streamlit-extrax,pip install networkx
+
+Inicializar el servidor 
+
+streamlit run homepage.py
