@@ -6,6 +6,7 @@ from codigos.arboles.implementacionArbolesBinariosBusqueda import *
 from codigos.arboles.implementacionAVL import *
 
 def intro():
+    """Introducción de árboles visualizado en streamlit"""
     st.header("🌳")
     st.title(':green[Árboles]')
     st.write(
@@ -16,6 +17,8 @@ def intro():
     )
 
 def importante_saber():
+    """Visualización de definiciones en streamlit"""
+
     st.header(":green[Importante entender]")
     st.write("""Los árboles se componen de los siguientes elementos:""")
     col1, col2, col3 = st.columns(3)
@@ -47,6 +50,8 @@ def importante_saber():
         st.markdown("<b>Sub-árbol</b>: es todo árbol generado a partir de una sección determinada del árbol", unsafe_allow_html=True)
 
 def tabs():
+    """Visualización de imagenes de árboles en streamlit"""
+
     tab1, tab2, tab3, tab4 = st.tabs(["Árbol", "Raíz, rama, hoja", "Nodos padre e hijos", "Hermanos"])
 
     with tab1:
@@ -59,10 +64,13 @@ def tabs():
         st.image("images/arboles/padreHermanos.png")
 
 def n_arios():
+    """Definición de árbol n-ario"""
+
     st.subheader('Árbol n-ario')
     st.write("Aquellos arboles donde el número máximo de hijos por nodo es de N.")
 
 def reglas_binarios():
+    """Visualización de reglas de árboles binarios"""
     st.header("Reglas de los árboles binarios")
     st.markdown(
         """
@@ -73,10 +81,12 @@ def reglas_binarios():
     )
 
 def binarios():
+    """Visualización de la definición de árboles binarios"""
     st.subheader('Árbol binario')
     st.write("Árbol n-ario de Grado 2, cada nodo solo puede tener máximo 2 hijos.")
 
 def codigos_huffman():
+    """Visualización de explicación de códigos de Huffman y aplicación interactiva"""
     st.subheader('_Códigos de Huffman_')
     st.write(
         '''El código de Huffman se utiliza para comprimir datos sin pérdida y reducir el tamaño de los datos mediante la eliminación de 
@@ -100,6 +110,7 @@ def codigos_huffman():
     uso_huffman()
 
 def usos_binarios():
+    """Visualización de los usos de árboles binarios"""
     st.header('Usos')
     st.markdown(
         """
@@ -135,6 +146,7 @@ def usos_binarios():
     arbol_busqueda.graficar()
 
 def binarios_busqueda():
+    """Visualización de información sobre árboles binarios de búsqueda"""
     st.header('Árboles binarios de búsqueda')
     st.write(
         '''
@@ -147,6 +159,7 @@ def binarios_busqueda():
     usos_binarios()
 
 def arbolesAVL():
+    """Visualización de información sobre árboles binarios de búsqueda avanzados junto con su implementación"""
     st.header('Árboles de búsqueda avanzados (AVL)')
     st.write(
         '''AVL es una estructura de datos de árbol binario de búsqueda balanceado. En un árbol AVL, la diferencia de altura entre los 
@@ -156,9 +169,10 @@ def arbolesAVL():
         búsqueda para indexar y clasificar resultados, en compiladores para optimizar el análisis sintáctico y semántico, y en muchas 
         otras aplicaciones.'''
     )
-    hola()
+    impAVL()
 
 def rojo_negro():
+    """Visualización de información de los árboles rojo negro, junto con su implementación interactiva"""
     st.header('Árboles rojo negro')
     st.write(
         '''
@@ -189,6 +203,7 @@ def rojo_negro():
     insertar_nodos_rbTree()
 
 def tipos():
+    """Visualización de los tipos de árboles"""
     st.header('Tipos')
     col1, col2 = st.columns(2)
 
@@ -218,6 +233,7 @@ def tipos():
         rojo_negro()
     
 def ejercicios_basicos():
+    """Visualización de los ejercicios básicos de implementación"""
     st.header("Ejercicios")
     st.write("""A continuación te mostraremos ejercicios para que apliques lo aprendido, la solución se muestra una vez indiques en el botón
             que quieres verla, sin embargo te recomendamos que intentes resolverlo tu solo para tu mejor comprensión. Recuerda que la mejor manera de 
@@ -227,6 +243,7 @@ def ejercicios_basicos():
     ejercicio3()
 
 def page():
+    """Organización de la página árboles"""
     intro()
     opcion = st.selectbox(
         'Escoge el tema a desplegar',

@@ -2,20 +2,26 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import streamlit as st
 
-# Definición de la clase Nodo para el árbol binario
 class Nodo:
+    """Definición de la clase Nodo para el árbol binario
+    """
     def __init__(self, valor):
         self.valor = valor
         self.izquierda = None
         self.derecha = None
 
-# Definición de la clase ÁrbolBinario
 class ArbolBinario:
+    """Definición de la clase ÁrbolBinario
+    """
     def __init__(self):
         self.raiz = None
 
-    # Función para insertar un nuevo nodo en el árbol
     def insertar(self, valor):
+        """Función para insertar un nuevo nodo en el árbol
+
+        Args:
+            valor (any): valor del nodo
+        """
         nuevo_nodo = Nodo(valor)
         if self.raiz is None:
             self.raiz = nuevo_nodo
@@ -35,8 +41,15 @@ class ArbolBinario:
                     else:
                         actual = actual.derecha
 
-    # Función para buscar un valor en el árbol
     def buscar(self, valor):
+        """Función para buscar un valor en el árbol
+
+        Args:
+            valor (any): valor buscado
+
+        Returns:
+            bool: True si es encontrado, False si no se encuentra
+        """
         if self.raiz is None:
             return False
         else:
@@ -52,6 +65,14 @@ class ArbolBinario:
 
 
     def eliminar(self, valor):
+        """Función para eliminar un nodo en el árbol
+
+        Args:
+            valor (any): valor del nodo a eliminar
+
+        Returns:
+            bool: devuelve True para indicar que el nodo se ha eliminado correctamente
+        """
         if self.raiz is None:
             return False
         else:
@@ -117,7 +138,17 @@ class ArbolBinario:
             return True
 
     def graficar(self):
+        """Función para graficar el árbol
+        """
         def graficar_arbol(nodo, nivel=0, posx=0, posy=0):
+            """Función para visualizar un árbol binario en forma gráfica utilizando la biblioteca matplotlib
+
+            Args:
+                nodo (Nodo): nodo raíz del árbol que se desea graficar.
+                nivel (int, optional): el nivel del nodo en el árbol (se utiliza para calcular la posición horizontal). Defaults to 0.
+                posx (int, optional): la posición horizontal actual del nodo. Defaults to 0.
+                posy (int, optional): la posición vertical actual del nodo.
+            """
             if nodo is None:
                 return
 

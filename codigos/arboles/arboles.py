@@ -2,6 +2,8 @@ import streamlit as st
 from codigos.arboles.rbTree import *
 
 def code_binary_tree():
+    """Códigos de la estructura y eventos de los árboles binarios y visualización en streamlit
+    """
     st.subheader("Estructura de un árbol")
     st.code(
         '''class Node:
@@ -143,6 +145,8 @@ def code_binary_tree():
     st.code(code, language='python')
 
 def ejercicio1():
+    """Ejercicio básico 1
+    """
     opcion = st.selectbox(
         "1.Escribe una función (o dos) que realice la reflexión de un árbol binario",
         ("-", "Mostrar solución")
@@ -171,6 +175,8 @@ def ejercicio1():
         st.code(code, language='python')
     
 def ejercicio2():
+    """Ejercicio básico 2
+    """
     opcion = st.selectbox(
         "2.Con la lista de números enteros [5, 8, 3, 2, 9, 1, 7], encuentra el número máximo en esa lista",
         ("-", "Mostrar solución")
@@ -197,6 +203,8 @@ def ejercicio2():
         st.code(code, language='python')
 
 def ejercicio3():
+    """Ejercicio básico 3
+    """
     opcion = st.selectbox(
         '3.Encuentra la palabra más larga que se encuentre en una lista determinada',
         ("-", "Mostrar solución")
@@ -223,6 +231,8 @@ def ejercicio3():
         st.code(code, language='python')
 
 def insertar_nodos_rbTree():
+    """Árbol interactivo, muestra el árbol en streamlit a medida que el usuario ingresa el valor de los nodos
+    """
     tree = RedBlackTree()
     # Verifica si la lista ya existe en el estado de la sesión
     if 'lista_numeros' not in st.session_state:
@@ -240,6 +250,8 @@ def insertar_nodos_rbTree():
     tree.plot_tree()
 
 def codigo_huffman():
+    """Estructura del código de Huffman y visualiación en streamlit
+    """
     code = '''
         from heapq import heappush, heappop, heapify
         from collections import defaultdict

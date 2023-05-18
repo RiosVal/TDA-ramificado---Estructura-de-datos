@@ -1,8 +1,15 @@
 from heapq import heappush, heappop, heapify
 from collections import defaultdict
 
-# Función auxiliar para crear un árbol de Huffman
 def construir_arbol_huffman(freq):
+    """Función auxiliar para crear un árbol de Huffman
+
+    Args:
+        freq (defaultdict):  símbolos y sus frecuencias en los datos a comprimir.
+
+    Returns:
+        list: lista de pares de símbolos y códigos binarios ordenados según la longitud de los códigos.
+    """
     heap = [[peso, [símbolo, ""]] for símbolo, peso in freq.items()]
     heapify(heap)
     while len(heap) > 1:
@@ -15,8 +22,16 @@ def construir_arbol_huffman(freq):
         heappush(heap, [lo[0] + hi[0]] + lo[1:] + hi[1:])
     return sorted(heappop(heap)[1:], key=lambda p: (len(p[-1]), p))
 
-# Función para codificar el mensaje
+
 def codificar_huffman(datos):
+    """Función para codificar el mensaje
+
+    Args:
+        datos (string): string que se desea comprimir utilizando Huffman.
+
+    Returns:
+        tuple: cadena comprimida y el árbol de Huffman.
+    """
     freq = defaultdict(int)
     for char in datos:
         freq[char] += 1
@@ -27,8 +42,17 @@ def codificar_huffman(datos):
     encoded = "".join(huff_dict[char] for char in datos)
     return encoded, arbol_huff
 
-# Función para decodificar el mensaje
+
 def decodificar_huffman(datos_codificados, arbol_huff):
+    """Función para decodificar el mensaje
+
+    Args:
+        datos_codificados (string): string codificado
+        arbol_huff (arbol de huffman):  el árbol de Huffman
+
+    Returns:
+        string: cadena decodificada
+    """
     if not arbol_huff:
         return ""
     dec_dict = {code: char for char, code in arbol_huff}

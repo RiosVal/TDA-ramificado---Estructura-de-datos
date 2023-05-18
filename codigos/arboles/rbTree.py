@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 class RBNode:
+    """Definición de la clase RBNode
+    """
     def __init__(self, key):
         self.key = key
         self.parent = None
@@ -11,11 +13,18 @@ class RBNode:
 
 
 class RedBlackTree:
+    """Definición de la clase RdBlackTree
+    """
     def __init__(self):
         self.nil = RBNode(None)
         self.root = self.nil
 
     def insert(self, key):
+        """Realiza la inserción de un nuevo nodo con ese valor en el árbol rojo-negro.
+
+        Args:
+            key (any): valor del nodo a insertar
+        """
         node = RBNode(key)
         node.left = self.nil
         node.right = self.nil
@@ -42,13 +51,16 @@ class RedBlackTree:
 
         if node.parent is None:
             node.color = "black"
-            #self.plot_tree()  # Graficar árbol después de la inserción
             return
 
         self.fix_insert(node)
-        #self.plot_tree()  # Graficar árbol después de la inserción
 
     def fix_insert(self, node):
+        """Equilibra el árbol rojo-negro después de la inserción de un nodo.
+
+        Args:
+            node (RBNode): nodo insertado
+        """
         while node.parent.color == "red":
             if node.parent == node.parent.parent.left:
                 uncle = node.parent.parent.right
@@ -86,6 +98,8 @@ class RedBlackTree:
         self.root.color = "black"
 
     def left_rotate(self, x):
+        """Implementa rotación hacia la izquierda
+        """
         y = x.right
         x.right = y.left
 
@@ -105,6 +119,8 @@ class RedBlackTree:
         x.parent = y
 
     def right_rotate(self, x):
+        """Implementa rotación hacia la derecha
+        """
         y = x.left
         x.left = y.right
 
@@ -125,22 +141,20 @@ class RedBlackTree:
 
 
     def plot_node(self, ax, node, x=0, y=0, level=1, dx=100, dy=50):
+        """Traza los nodos del árbol rojo-negro utilizando la biblioteca Matplotlib. """
         if node == self.nil:
             return
 
-        # Plot current node
         color = "red" if node.color == "red" else "black"
         ax.text(x, y, str(node.key), color=color, weight="bold", ha="center", va="center",
                 bbox=dict(facecolor="white", edgecolor=color))
 
-        # Plot left subtree
         if node.left != self.nil:
             x_left = x - dx * (1 / 2) ** level
             y_left = y - dy
             ax.plot([x, x_left], [y, y_left], color=color, linestyle="-")
             self.plot_node(ax, node.left, x_left, y_left, level + 1, dx, dy)
 
-        # Plot right subtree
         if node.right != self.nil:
             x_right = x + dx * (1 / 2) ** level
             y_right = y - dy
@@ -148,6 +162,7 @@ class RedBlackTree:
             self.plot_node(ax, node.right, x_right, y_right, level + 1, dx, dy)
 
     def plot_tree(self):
+        """Muestra la figura en streamlit"""
         fig, ax = plt.subplots()
         self.plot_node(ax, self.root)
         ax.axis("off")

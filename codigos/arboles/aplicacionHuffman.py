@@ -2,6 +2,8 @@ from codigos.arboles.huffman import *
 import streamlit as st
 
 def uso_huffman():
+    """Aplicación del código de Huffman
+    """
     datos = st.text_input('Ingresa texto a codificar')
     datos_codificados, arbol = codificar_huffman(datos)
     datos_decodificados = decodificar_huffman(datos_codificados, arbol)

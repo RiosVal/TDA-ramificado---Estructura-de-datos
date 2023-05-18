@@ -2,6 +2,11 @@ from codigos.arboles.arbolesBinariosBusqueda import *
 import streamlit as st
 
 def insertar_nodos() -> ArbolBinario:
+    """Permite al usuario insertar nodos en un árbol binario interactivo
+
+    Returns:
+        ArbolBinario: arbol binario creado
+    """
     arbol = ArbolBinario()
     # Verifica si la lista ya existe en el estado de la sesión
     if 'lista_nodos' not in st.session_state:
@@ -19,6 +24,11 @@ def insertar_nodos() -> ArbolBinario:
     return arbol
 
 def buscar_eliminar_nodo(arbol: ArbolBinario):
+    """Permite al usuario buscar y eliminar nodos en el árbol binario
+
+    Args:
+        arbol (ArbolBinario): árbol en donde se ejecutarán las acciones
+    """
     eliminados, buscados = st.columns(2)
     with eliminados:
         num_eliminar = st.number_input('Número a eliminar')
