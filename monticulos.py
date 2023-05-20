@@ -174,3 +174,34 @@ print(monticulo.get_max())  # Debe imprimir 5
 
 '''
         st.code(code, language='python')
+    
+    
+def ejercicio2():
+    opcion = st.selectbox(
+       '2.Calcular el enesimo de una secuencia Fibonacci',
+        ("-", "Mostrar solución")
+    )
+    if opcion == "Mostrar solución":
+        code = '''
+         def fibonacci(n):
+    if n <= 0:
+        return None
+    if n == 1:
+        return 0
+    if n == 2:
+        return 1
+    
+    a, b = 0, 1
+    for _ in range(3, n + 1):
+        a, b = b, a + b
+    
+    return b
+
+# Ejemplo de uso
+print(fibonacci(1))   # Debe devolver 0
+print(fibonacci(5))   # Debe devolver 3
+print(fibonacci(10))  # Debe devolver 34
+
+
+'''
+        st.code(code, language='python')
