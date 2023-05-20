@@ -143,7 +143,7 @@ def ejercicios():
             que quieres verla, sin embargo te recomendamos que intentes resolverlo tu solo para tu mejor comprensión. Recuerda que la mejor manera de 
             aprender es haciéndolo tu mismo.""")
     ejercicio1()
-
+    ejercicio2()
 
 
 
