@@ -221,9 +221,12 @@ def tipos():
                     - Permite las operaciones de inserción, unión y extracción del mínimo en tiempo logarítmico.
                     - La unión de dos montículos de par binario se realiza combinando los elementos en función de la paridad de sus índices.
                     """, unsafe_allow_html=True)
+def tda_monticulos():
+    st.write('''Para la aplicacion de una tda en los monticulos necesitaremos 
+    un vector con n elementos que estos seran llamados *heap*este sera util para representar un arbol binario,
+    ademas usaremos funciones que definiran cada uno de su funcionamiento''',unsafe_allow_html=True)
 
-
-
+    
 
 def page():
     intro()
@@ -232,7 +235,9 @@ def page():
         (
             '',
             'Definiciones importantes',
-            'Tipos de árboles',
+            'Tipos de monticulos',
+            'Monticulos MaxMin',
+            'Aplicacion TDA',
             'Ejercicios básicos de comprensión',
             'Ejercicio de aplicación'
         )
@@ -244,6 +249,8 @@ def page():
         tipos()
     elif opcion =='Monticulos MaxMin':
         monticulosMaxMin()
+    elif opcion == 'Aplicacion TDA':
+        tda_monticulos()
     elif opcion == 'Ejercicios básicos de comprensión':
         ejercicios()
     elif opcion == 'Ejercicio de aplicación':
