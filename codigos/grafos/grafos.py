@@ -6,7 +6,8 @@ from codigos.grafos.rbGraphs import *
 
 
 def code_grafos():
-    st.subheader("Estructura de un vertice")
+    st.subheader("Estructura de un Grafo")
+    #se vera todo el contenido del codigo en base a grafos
     st.code(
         '''
         class nodoArista(object):
@@ -44,6 +45,7 @@ def code_grafos():
     st.subheader("Eventos")
     opcion = st.selectbox(
         "",
+        #Eventos que pueden suceder
         (
             "Insertar_vertices_e_aristas",
             "Agregrar_arista",
@@ -302,7 +304,7 @@ def code_dijkstra():
 
 def ejercicio1():
     opcion = st.selectbox(
-        "1. Escribe una función una funcion que demuestre como se comunican las redes",
+        "1. Supongamos que tenemos 4 redes telefonicas ['Red A', 'Red B', 'Red C', 'Red D']  Escribe una función  que demuestre como se comunican las redes",
         ("-", "Mostrar solución")
     )
     if opcion == "Mostrar solución":
@@ -342,6 +344,51 @@ def ejercicio1():
                     del self.nodos[n][nodo]
 '''
         st.code(code, language='python')
+
+ 
+
+
+
+def graficar_comunicacion_redes():
+    opcion = st.selectbox(
+        "1.Grafica del ejerciocio",
+        ("-", "Mostrar solución")
+    )
+    if opcion == "Mostrar solución":
+    
+    
+        redes = ['Red A', 'Red B', 'Red C', 'Red D']
+    
+
+        # Crea un grafo vacío
+        grafo = nx.Graph()
+
+        # Agrega los nodos al grafo correspondientes a cada red
+        for red in redes:
+            grafo.add_node(red)
+
+        # Muestra el grafo vacío
+        plt.figure(figsize=(6, 4))
+        plt.title("Comunicación entre redes - Paso 0")
+        nx.draw(grafo, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
+        plt.axis('off')
+        st.pyplot(plt)
+
+        # Agrega las aristas una por una y muestra el grafo actualizado
+        for i in range(len(redes)):
+            red1 = redes[i]
+            red2 = redes[(i + 1) % len(redes)]  # Conecta con la siguiente red en la lista
+            grafo.add_edge(red1, red2)
+
+            plt.figure(figsize=(6, 4))
+            plt.title(f"Comunicación entre redes - Paso {i+1}")
+            nx.draw(grafo, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
+            plt.axis('off')
+            st.pyplot(plt)
+
+    # Llamada a la función para mostrar el proceso de construcción del grafo
+graficar_comunicacion_redes()
+
     
 def ejercicio2():
     opcion = st.selectbox(
@@ -385,6 +432,49 @@ def ejercicio2():
                     del self.nodos[n][nodo]'''
         st.code(code, language='python')
 
+
+def encontrar_camino_mas_corto():
+    opcion = st.selectbox(
+        "2.Grafica del ejerciocio",
+        ("-", "Mostrar solución")
+    )
+    if opcion == "Mostrar solución":
+    
+        # Crea un grafo de ejemplo
+        grafo = nx.Graph()
+        grafo.add_edge('A', 'B', weight=3)
+        grafo.add_edge('B', 'C', weight=2)
+        grafo.add_edge('C', 'D', weight=4)
+        grafo.add_edge('A', 'D', weight=5)
+    
+        # Valores de ejemplo para los nodos iniciales y finales
+        nodo_inicial_ejemplo = 'A'
+        nodo_final_ejemplo = 'D'
+
+        # Interfaz de Streamlit
+        st.title("Encontrar el camino más corto en un grafo")
+        nodo_inicial = st.text_input("Ingrese el nodo inicial", value=nodo_inicial_ejemplo)
+        nodo_final = st.text_input("Ingrese el nodo final", value=nodo_final_ejemplo)
+        if st.button("Encontrar camino más corto"):
+            if nodo_inicial and nodo_final:
+                # Encuentra el camino más corto utilizando el algoritmo de Dijkstra
+                camino = nx.dijkstra_path(grafo, nodo_inicial, nodo_final)
+                distancia = nx.dijkstra_path_length(grafo, nodo_inicial, nodo_final)
+
+                # Imprime el camino más corto y la distancia
+                st.write("Camino más corto:", camino)
+                st.write("Distancia:", distancia)
+            else:
+                st.write("Ingrese el nodo inicial y el nodo final.")
+
+        # Muestra el grafo
+        plt.figure(figsize=(6, 4))
+        nx.draw(grafo, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
+        plt.title("Grafo")
+        plt.axis('off')
+        st.pyplot(plt)
+
+
 def ejercicio3():
     opcion = st.selectbox(
         '3. Crea una funcion que demuestre todos los componentes conectados dentro de un grafo',
@@ -427,18 +517,78 @@ class GrafoComunicacion:
 '''
         st.code(code, language='python')
 
+def encontrar_componentes_conectados():
+    opcion = st.selectbox(
+        "3.Grafica del ejerciocio",
+        ("-", "Mostrar solución")
+    )
+    if opcion == "Mostrar solución":
+        st.write("Crear Grafo")
+
+        # Obtener la lista de letras ingresadas por el usuario
+        letras = st.text_input("Ingrese las letras separadas por espacios").split()
+
+        # Crear un grafo vacío
+        G = nx.Graph()
+
+        # Agregar las letras como nodos
+        G.add_nodes_from(letras)
+
+        st.write("Conexiones")
+
+        # Obtener las conexiones ingresadas por el usuario
+        conexiones = st.text_input("Ingrese las conexiones en el formato A-B, separadas por espacios").split()
+
+        # Agregar las conexiones al grafo
+        for conexion in conexiones:
+            nodo1, nodo2 = conexion.split('-')
+            G.add_edge(nodo1, nodo2)
+
+        # Encontrar los componentes conectados
+        componentes_conectados = nx.connected_components(G)
+
+        # Dibujar el grafo
+        plt.figure(figsize=(6, 6))
+        pos = nx.spring_layout(G)
+        nx.draw_networkx(G, pos, with_labels=True, node_color='skyblue', node_size=800, font_size=12, edge_color='gray', width=2)
+
+        # Mostrar los componentes conectados
+        st.write("Componentes Conectados:")
+        for i, componente in enumerate(componentes_conectados):
+            st.write(f"Componente {i+1}: {componente}")
+
+        # Mostrar el grafo
+        st.pyplot(plt)
+
+
+# Ejecutar la función
+encontrar_componentes_conectados()
+       
+        
+        
+    
+        
+
+
 
 
 
 
 def in_adya():
     st.subheader("Matriz adyacencia")
+    st.markdown(
+    """
+    La matriz de adyacencia es una representación de un grafo mediante una matriz cuadrada. En esta matriz, las filas y columnas representan los vértices del grafo, y los elementos de la matriz indican si hay una arista o conexión entre los vértices correspondientes
+    
+    """ 
+    )
+    # Solicitar al usuario el número de nodos del grafo
     n = st.number_input("Ingrese el número de nodos del grafo", min_value=1, max_value=10, step=1)
 
- 
+    # Crear una matriz de ceros de tamaño n x n utilizando NumPy    
     matriz = np.zeros((n, n))
 
-   
+    # Solicitar al usuario ingresar los elementos de la matriz de adyacencia
     for i in range(n):
         for j in range(n):
             
@@ -447,14 +597,14 @@ def in_adya():
             
             matriz[i, j] = valor
 
-   
+   # Mostrar la matriz de adyacencia resultante
     st.write("Matriz de adyacencia:")
     st.write(matriz)
 
-    
+    # Crear un grafo a partir de la matriz de adyacencia utilizando NetworkX 
     grafo = nx.from_numpy_array(matriz)
 
-    
+    # Visualizar el grafo utilizando Matplotlib y NetworkX
     plt.figure(figsize=(6, 4))
     nx.draw(grafo, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
     plt.title("Grafo")
@@ -467,13 +617,21 @@ if __name__ == "__main__":
 
 def in_vec():
     st.subheader("Matriz vector")
-   
+    st.markdown(
+    """   
+    La matriz de un vector es una estructura rectangular compuesta por una sola columna o una sola fila de elementos. Esta matriz se utiliza para almacenar y manipular un conjunto de valores ordenados de forma lineal.
+    """ 
+    )
+    # Solicitar al usuario el tamaño del vector
+    n = st.number_input("Ingrese el número de nodos del grafo", min_value=1, max_value=10, step=1)
+    
+    # Solicitar al usuario el tamaño del vector
     n = st.number_input("Ingrese el tamaño del vector", min_value=1, max_value=10, step=1)
 
-   
+  
     vector = []
 
-    
+     # Solicitar al usuario ingresar los elementos del vector
     for i in range(n):
         
         key = f"vector-{i}"
@@ -481,19 +639,22 @@ def in_vec():
        
         vector.append(valor)
 
+
   
+    # Mostrar el vector
     st.write("Vector:")
     st.write(vector)
 
    
     grafo = nx.Graph()
     grafo.add_nodes_from(range(n))
+    # Verificar elementos repetidos en el vector y agregar aristas al grafo
     for i in range(n):
         for j in range(i+1, n):
             if vector[i] == vector[j]:
                 grafo.add_edge(i, j)
 
-    
+    # Visualizar el grafo utilizando Matplotlib y NetworkX
     plt.figure(figsize=(6, 4))
     nx.draw(grafo, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
     plt.title("Grafo")
@@ -501,18 +662,27 @@ def in_vec():
     st.pyplot(plt)
 
 if __name__ == "__main__":
-    in_vec()
+    in_vector()
 
 
 
 def in_matriz():
     st.subheader("Mattriz lista")
+    st.markdown(
+    """
+   La matriz de lista es una representación de un grafo mediante una estructura de datos que utiliza listas en lugar de una matriz cuadrada. En esta representación, cada vértice del grafo se mapea a una lista que contiene los vértices adyacentes a él. Cada elemento de la lista representa una conexión o arista entre los vértices. Esta representación es eficiente para grafos dispersos, ya que solo se almacenan las conexiones existentes y no se desperdicia espacio para conexiones ausentes. 
+    
+    """ 
+    
+    )
+    # Solicitar al usuario el tamaño de la matriz
     n = st.number_input("Ingrese el tamaño de la matriz", min_value=1, max_value=10, step=1)
 
-
+   # Crear una matriz lista vacía
     matriz = [[] for _ in range(n)]
 
    
+    # Solicitar al usuario ingresar los elementos de la matriz lista
     for i in range(n):
         for j in range(n):
          
@@ -520,14 +690,15 @@ def in_matriz():
    
             matriz[i].append(valor)
 
- 
+    # Mostrar la matriz lista
     st.write("Matriz:")
     for row in matriz:
         st.write(row)
 
-    
+    # Crear un grafo vacío
     grafo = nx.Graph()
     grafo.add_nodes_from(range(n))
+    # Visualizar el grafo utilizando Matplotlib y NetworkX
     for i in range(n):
         for j in matriz[i]:
             if j != 0:
