@@ -3,11 +3,11 @@ Este proyecto utiliza streamlit, por lo tanto para que funcione debes seguir los
 ¡SI NO TIENES UN ENTORNO VIRTUAL CREADO!
 1. Clona el repositorio o descarga el archivo .zip en tu computador
 2. Instala un entorno virtual:
-  1.1. Abre el cmd de tu computador
-  1.2. Accede a la carpeta donde está el proyecto y todos los códigos con el comando cd "ruta de acceso de la carpeta"
-  1.3. Pega este comando: py -m venv venv
-  1.4. Pega este comando: venv\Scripts\activate.bat
-  1.5. Una vez veas (venv) al lado izquierdo, instala las librerías necesarias para que el proyecto funcione pegando los siguientes comandos:
+  1. Abre el cmd de tu computador
+  2. Accede a la carpeta donde está el proyecto y todos los códigos con el comando cd "ruta de acceso de la carpeta"
+  3. Pega este comando: py -m venv venv
+  4. Pega este comando: venv\Scripts\activate.bat
+  5. Una vez veas (venv) al lado izquierdo, instala las librerías necesarias para que el proyecto funcione pegando los siguientes comandos:
     1. pip install streamlit
     2. pip install streamlit-extras
     3. pip install networkx
