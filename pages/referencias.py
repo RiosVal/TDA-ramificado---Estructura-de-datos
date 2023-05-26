@@ -27,7 +27,10 @@ def referencias_monticulos():
     st.markdown(
         '''
             - "TDA ramificado", class notes for 79021-3L- 1195 - 1587 Estructura de datos, Facultad de ingeniería, Universidad de San Buenaventura Cali, 2023
-
+            - [1]vestigium [Online]. Available: https://www.glc.us.es/~jalonso/vestigium/i1m2018-ejercicios-con-el-tipo-abstracto-de-dato-de-los-monticulos/ 
+            - [2]Tema5.3_ColasPrioridad_Monticulos[EDA][online]. Available: https://www.cartagena99.com/recursos/alumnos/apuntes/Tema5.3_ColasPrioridad_Monticulos[EDA].pdf
+            - [3]udb.edu.co[online]. Available: https://www.udb.edu.sv/udb_files/recursos_guias/informatica-ingenieria/programacion-con-estructuras-de-datos/2019/i/guia-9.pdf
+            - [4]Monticulos.pdf [online]. Available: file:///C:/Users/jcast/Downloads/Monti.pdf
         '''
     )
 
@@ -37,3 +40,5 @@ def page():
     referencias_arboles()
     referencias_grafos()
     referencias_monticulos()
+
+page()
