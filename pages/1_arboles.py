@@ -4,6 +4,7 @@ from codigos.arboles.rbTree import *
 from codigos.arboles.aplicacionHuffman import uso_huffman
 from codigos.arboles.implementacionArbolesBinariosBusqueda import *
 from codigos.arboles.implementacionAVL import *
+from codigos.arboles.ejercicio_practico import mostrar_prediccion
 
 def intro():
     """Introducción de árboles visualizado en streamlit"""
@@ -263,7 +264,7 @@ def page():
     elif opcion == 'Ejercicios básicos de comprensión':
         ejercicios_basicos()
     elif opcion == 'Ejercicio de aplicación':
-        st.write('EJERCICIO AQUÍ')
+        mostrar_prediccion()
 
 page()
 

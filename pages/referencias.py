@@ -18,7 +18,8 @@ def referencias_grafos():
     st.markdown(
         '''
             - "TDA ramificado", class notes for 79021-3L- 1195 - 1587 Estructura de datos, Facultad de ingeniería, Universidad de San Buenaventura Cali, 2023
-
+            - Teoría de grafos - UniPamplona (2015). Estructura de Datos : Grafos y vertices [online]. Available: https://www.youtube.com/watch?v=tbCw6pq1E7c&list=PLCh9J2_B_crLJN8L_1aVfJL-kjfEiazvv&index=2
+            - Algoritmo de Dijkstra - Wikipedia (2004). Estructura de Datos : Dijkstra [online]. Available:https://es.wikipedia.org/wiki/Algoritmo_de_Dijkstra
         '''
     )
 
