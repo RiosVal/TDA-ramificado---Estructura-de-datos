@@ -4,6 +4,7 @@ from codigos.arboles.rbTree import *
 from codigos.arboles.aplicacionHuffman import uso_huffman
 from codigos.arboles.implementacionArbolesBinariosBusqueda import *
 from codigos.arboles.implementacionAVL import *
+from codigos.arboles.ejercicio_practico import mostrar_prediccion
 
 def intro():
     """Introducción de árboles visualizado en streamlit"""
@@ -12,7 +13,7 @@ def intro():
     st.write(
         """
         Los árboles son estructuras de datos que se caracterizan por almacenar sus nodos en forma jerárquica, a diferencia de las listas
-        que los almacenan en forma lineal.
+        que los almacenan en forma lineal.[2]
         """,
     )
 
@@ -24,30 +25,30 @@ def importante_saber():
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        st.markdown("<b>Nodo</b>: cada elemento que contiene un árbol", unsafe_allow_html=True)
-        st.markdown("<b>Nodo raíz</b>: primer nodo de un árbol", unsafe_allow_html=True)
-        st.markdown("<b>Nodo padre</b>: aquellos nodos que tienen al menos un hijo y está directamente superior a el", unsafe_allow_html=True)
-        st.markdown("<b>Nodo hijo</b>: todos quellos que tienen un padre", unsafe_allow_html=True)    
-        st.markdown("<b>Nodo hermano</b>: los nodos que comparten a un mismo padre", unsafe_allow_html=True)
-        st.markdown("<b>Nodo hoja</b>: nodos que no tienen hijos", unsafe_allow_html=True)
-        st.markdown("<b>Nodo rama</b>: aquellos nodos que no son raíz y tienen al menos un hijo", unsafe_allow_html=True)
-        st.markdown("<b>Decendiente</b>: nodo que está en un nivel inferior en relación con otro nodo específico", unsafe_allow_html=True)
+        st.markdown("<b>Nodo</b>: cada elemento que contiene un árbol[4]", unsafe_allow_html=True)
+        st.markdown("<b>Nodo raíz</b>: primer nodo de un árbol[4]", unsafe_allow_html=True)
+        st.markdown("<b>Nodo padre</b>: aquellos nodos que tienen al menos un hijo y está directamente superior a el[2]", unsafe_allow_html=True)
+        st.markdown("<b>Nodo hijo</b>: todos quellos que tienen un padre[4]", unsafe_allow_html=True)    
+        st.markdown("<b>Nodo hermano</b>: los nodos que comparten a un mismo padre[4]", unsafe_allow_html=True)
+        st.markdown("<b>Nodo hoja</b>: nodos que no tienen hijos[4]", unsafe_allow_html=True)
+        st.markdown("<b>Nodo rama</b>: aquellos nodos que no son raíz y tienen al menos un hijo[4]", unsafe_allow_html=True)
+        st.markdown("<b>Decendiente</b>: nodo que está en un nivel inferior en relación con otro nodo específico[1]", unsafe_allow_html=True)
     with col2:
-        st.markdown("<b>Ancestro</b>: nodo que está en un nivel superior en relación con otro nodo específico", unsafe_allow_html=True)
-        st.markdown("<b>Nodo interno</b>: nodo que tiene al menos un hijo", unsafe_allow_html=True)
-        st.markdown("<b>Camino</b>: secuencia de nodos conectados entre sí en el árbol", unsafe_allow_html=True)
-        st.markdown("<b>Nivel de un nodo</b>: posición relativa de un nodo en el árbol", unsafe_allow_html=True)
-        st.markdown("<b>Nivel de un árbol</b>: es el nivel más alto entre todos los nodos del árbol", unsafe_allow_html=True)
-        st.markdown("<b>Altura de un nodo</b>: es la longitud del camino más largo desde ese nodo hasta un nodo terminal", unsafe_allow_html=True)
-        st.markdown("<b>Altura de un árbol</b>: es la longitud máxima del camino desde la raíz hasta el nodo más alejado", unsafe_allow_html=True)
-        st.markdown("<b>Peso de un nodo</b>: valor asociado o atributo numérico asociado al nodo", unsafe_allow_html=True)
+        st.markdown("<b>Ancestro</b>: nodo que está en un nivel superior en relación con otro nodo específico[4]", unsafe_allow_html=True)
+        st.markdown("<b>Nodo interno</b>: nodo que tiene al menos un hijo[1]", unsafe_allow_html=True)
+        st.markdown("<b>Camino</b>: secuencia de nodos conectados entre sí en el árbol[4]", unsafe_allow_html=True)
+        st.markdown("<b>Nivel de un nodo</b>: posición relativa de un nodo en el árbol[1]", unsafe_allow_html=True)
+        st.markdown("<b>Nivel de un árbol</b>: es el nivel más alto entre todos los nodos del árbol[1]", unsafe_allow_html=True)
+        st.markdown("<b>Altura de un nodo</b>: es la longitud del camino más largo desde ese nodo hasta un nodo terminal[1]", unsafe_allow_html=True)
+        st.markdown("<b>Altura de un árbol</b>: es la longitud máxima del camino desde la raíz hasta el nodo más alejado[1]", unsafe_allow_html=True)
+        st.markdown("<b>Peso de un nodo</b>: valor asociado o atributo numérico asociado al nodo[1]", unsafe_allow_html=True)
     with col3:
-        st.markdown("<b>Peso de un árbol</b>: suma de los persos de todos los nodos de ese árbol", unsafe_allow_html=True)
-        st.markdown("<b>Orden</b>: número máximo de hijos que puede tener un nodo", unsafe_allow_html=True)
-        st.markdown("<b>Grado</b>: numero mayor d ehijos que tiene alguno de los nodos del árbol", unsafe_allow_html=True)
-        st.markdown("<b>Profundidad</b>: distancia entre un nodo dado y la raíz del árbol", unsafe_allow_html=True)
-        st.markdown("<b>Bosque</b>: coleccion de árboles disjuntos, donde cada átbol puede tener su propia raíz y nodos", unsafe_allow_html=True)
-        st.markdown("<b>Sub-árbol</b>: es todo árbol generado a partir de una sección determinada del árbol", unsafe_allow_html=True)
+        st.markdown("<b>Peso de un árbol</b>: suma de los persos de todos los nodos de ese árbol[1]", unsafe_allow_html=True)
+        st.markdown("<b>Orden</b>: número máximo de hijos que puede tener un nodo[1]", unsafe_allow_html=True)
+        st.markdown("<b>Grado</b>: numero mayor d ehijos que tiene alguno de los nodos del árbol[4]", unsafe_allow_html=True)
+        st.markdown("<b>Profundidad</b>: distancia entre un nodo dado y la raíz del árbol[1]", unsafe_allow_html=True)
+        st.markdown("<b>Bosque</b>: coleccion de árboles disjuntos, donde cada átbol puede tener su propia raíz y nodos[1]", unsafe_allow_html=True)
+        st.markdown("<b>Sub-árbol</b>: es todo árbol generado a partir de una sección determinada del árbol[4]", unsafe_allow_html=True)
 
 def tabs():
     """Visualización de imagenes de árboles en streamlit"""
@@ -67,7 +68,7 @@ def n_arios():
     """Definición de árbol n-ario"""
 
     st.subheader('Árbol n-ario')
-    st.write("Aquellos arboles donde el número máximo de hijos por nodo es de N.")
+    st.write("Aquellos arboles donde el número máximo de hijos por nodo es de N.[4]")
 
 def reglas_binarios():
     """Visualización de reglas de árboles binarios"""
@@ -83,7 +84,7 @@ def reglas_binarios():
 def binarios():
     """Visualización de la definición de árboles binarios"""
     st.subheader('Árbol binario')
-    st.write("Árbol n-ario de Grado 2, cada nodo solo puede tener máximo 2 hijos.")
+    st.write("Árbol n-ario de Grado 2, cada nodo solo puede tener máximo 2 hijos.[4]")
 
 def codigos_huffman():
     """Visualización de explicación de códigos de Huffman y aplicación interactiva"""
@@ -130,7 +131,7 @@ def usos_binarios():
         archivos, la estructura de una página web, la jerarquía de categorías en un sistema de gestión de contenidos, entre otros.
         - Inteligencia artificial y aprendizaje automático: Los árboles de decisión y los bosques aleatorios (random forests) 
         se utilizan en aplicaciones de inteligencia artificial y aprendizaje automático para la clasificación y toma de decisiones. 
-        Estos árboles se utilizan para construir modelos predictivos basados en reglas de decisión.
+        Estos árboles se utilizan para construir modelos predictivos basados en reglas de decisión[1].
         """
     )
     codigos_huffman()
@@ -153,7 +154,7 @@ def binarios_busqueda():
             Los árboles de búsqueda binarios son utilizados para buscar y recuperar información de manera eficiente, se utilizan comúnmente 
             en la implementación de bases de datos, la indexación de archivos y la búsqueda de elementos en aplicaciones de búsqueda. 
             También son utilizados en algoritmos de ordenamiento y en la implementación de estructuras de datos como colas de 
-            prioridad y conjuntos
+            prioridad y conjuntos[3]
         '''
     )
     usos_binarios()
@@ -167,7 +168,7 @@ def arbolesAVL():
         modelo es útil en situaciones en las que es necesario mantener los elementos ordenados y se desea reducir la complejidad temporal 
         de las operaciones en el árbol. Por ejemplo, se puede utilizar en bases de datos para almacenar y ordenar registros, en motores de 
         búsqueda para indexar y clasificar resultados, en compiladores para optimizar el análisis sintáctico y semántico, y en muchas 
-        otras aplicaciones.'''
+        otras aplicaciones.[6]'''
     )
     impAVL()
 
@@ -178,7 +179,7 @@ def rojo_negro():
         '''
         Son una estructura de datos basada en árboles binarios de búsqueda que se utiliza para mantener los elementos de 
         manera ordenada y equilibrada. Estos árboles se llaman así debido a las propiedades de sus nodos, que son etiquetados 
-        como "rojos" o "negros".
+        como "rojos" o "negros"[6].
         '''
     )
     st.subheader('Características')
@@ -263,7 +264,7 @@ def page():
     elif opcion == 'Ejercicios básicos de comprensión':
         ejercicios_basicos()
     elif opcion == 'Ejercicio de aplicación':
-        st.write('EJERCICIO AQUÍ')
+        mostrar_prediccion()
 
 page()
 

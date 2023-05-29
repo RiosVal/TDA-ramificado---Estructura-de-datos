@@ -1,52 +1,53 @@
 import streamlit as st
+from codigos.grafos.grafos_dij import *
 from codigos.grafos.grafos import *
 from codigos.grafos.rbGraphs import *
-
+from codigos.grafos.grafos_eje import *
+from codigos.grafos.grafos_matriz import *
 
 
 
 def intro():
-
     st.header("🕸️")
 
     st.markdown('<h1>Grafos</h1>', unsafe_allow_html=True)
     st.markdown(
-    """
-        <p>
-          Un grafo es una estructura de datos no lineal que consta de vértices y aristas.
+        """
+          <p>
+             Un grafo es una estructura de datos no lineal que consta de vértices y aristas.
              Los vértices a veces también se denominan nodos y los bordes son líneas o arcos que conectan dos nodos en el grafo. 
              Más formalmente, 
              un grafo se compone de un conjunto de vértices 
              (V) y un conjunto de aristas (E). El grafo se denota por G(E, V).
-        </p>
+
+         </p>
 
 
     """, unsafe_allow_html=True)
 
 def importante_saber():
-
     st.markdown("<h2> Importante entender </h2>", unsafe_allow_html=True)
     st.markdown("""<p> Los Grafos se componen por los siguientes elementos:</p>""", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
     # with col1: 
-    # st.markdown("- <b> Vertices:</b> son las unidades fundamentales del grafo. A veces, los vértices también se conocen como vértices o nodos. Cada nodo/vértice se puede etiquetar o no etiquetar.", unsafe_allow_html=True)
-    # st.markdown("- <b> Adyacencia: </b> ", unsafe_allow_html=True)
+    #     st.markdown("- <b> Vertices:</b> son las unidades fundamentales del grafo. A veces, los vértices también se conocen como vértices o nodos. Cada nodo/vértice se puede etiquetar o no etiquetar.", unsafe_allow_html=True)
+    #     st.markdown("- <b> Adyacencia: </b> ", unsafe_allow_html=True)
     with col1:
         st.markdown("- <b> Vertices:</b> son las unidades fundamentales del grafo. A veces, los vértices también se conocen como vértices o nodos. Cada nodo/vértice se puede etiquetar o no etiquetar.", unsafe_allow_html=True)
         st.markdown("- <b>Adyacencia:</b> Representa una lista de vertices ", unsafe_allow_html=True)
-        st.markdown("- <b>Camino:</b> Es una secuencia de arcos , la cual cada extremo coincide con el inicio y el final", unsafe_allow_html=True)
-        st.markdown("- <b>Longitud de camino:</b> Es el numero de numero de aristas que la forman ",unsafe_allow_html=True)
+        st.markdown("- <b>Camino:</b> Es una secuencia de arcos, la cual cada extremo coincide con el inicio y el final", unsafe_allow_html=True)
+        st.markdown("- <b>Longitud de camino:</b> Es el número de numero de aristas que la forman ",unsafe_allow_html=True)
 
 
     with col2:
         st.markdown("- <b> Aristas: </b> Las aristas se dibujan o se usan para conectar dos nodos del gráfico. Se puede ordenar un par de nodos en un gráfico dirigido. Las aristas pueden conectar dos nodos cualesquiera de cualquier forma posible. Las aristas también se conocen como arcos. Cada arista se puede etiquetar/desetiquetar. </b>",unsafe_allow_html=True)
         st.markdown("- <b> Etiqueta de arista:</b> son aquellos en los que las aristas tienen una etiqueta o peso asociado que representa alguna característica o propiedad específica ",unsafe_allow_html=True)
-        st.markdown("- <b> Conexo:</b> todos sus vertices tine una relacion o una forma de comunicarse entre si ya se simple o relacionandose a traves de uno a mas aristas",unsafe_allow_html=True)
+        st.markdown("- <b> Conexo:</b> todos sus vertices tine una relacion o una forma de comunicarse entre si ya se simple o relacionandose a traves de uno a más aristas",unsafe_allow_html=True)
     st.image("images/grafos/partes grafos.png")
 def tabs():
-    tab1,tab2,tab3,tab4,tab5,tab6 = st.tabs(["Grafos no dirigidos","Grafos dirigidos"," Camino hamiltoneano","Camino euleriano","Grafos aciclico","Grafos ponderados"])
+    tab1,tab2,tab3,tab4,tab5,tab6= st.tabs(["Grafos no dirigidos","Grafos dirigidos"," Camino hamiltoneano","Camino euleriano","Grafos aciclico","Grafos ponderados"])
 
     with tab1: #GRAFOS NO DIRIGIDOS
         #   st.image()
@@ -60,7 +61,7 @@ def tabs():
         #st.image()
         st.markdown("""
 
-        <p> Un grafo en el que los bordes tienen una dirección, es decir, los bordes tienen flechas que indican la dirección de recorrido. Ejemplo: un grafo de página web donde los enlaces entre páginas son direccionales. </p>
+     <p> Un grafo en el que los bordes tienen una dirección, es decir, los bordes tienen flechas que indican la dirección de recorrido. Ejemplo: un grafo de página web donde los enlaces entre páginas son direccionales. </p>
 
         """,unsafe_allow_html=True)
         st.image("images/grafos/g.dirigidos.png")
@@ -68,12 +69,12 @@ def tabs():
         #st.image()
         st.markdown("""
 
-        <p>En el campo matemático de la teoría de grafos, es un camino
-        de un grafo, una sucesión de aristas adyacentes, que visita
-        todos los vértices del grafo una sola vez. Si además el último
-        vértice visitado es adyacent al primero, el camino es un ciclo
-        hamiltoniano.</p>
-        """,unsafe_allow_html=True)
+            <p>En el campo matemático de la teoría de grafos, es un camino
+            de un grafo, una sucesión de aristas adyacentes, que visita
+            todos los vértices del grafo una sola vez. Si además el último
+            vértice visitado es adyacent al primero, el camino es un ciclo
+            hamiltoniano.</p>
+         """,unsafe_allow_html=True)
         st.image("images/grafos/hamiltoniano.png")
     with tab4: #camino euleriano
         #st.image()
@@ -96,17 +97,17 @@ def tabs():
 
         """,unsafe_allow_html=True)
         st.image("images/grafos/aciclico.png")
-    with tab6:
+    with tab6: #Grafos ponderados
         st.markdown("""
 
         <p>Un grafo ponderado es una estructura de datos que consiste en un conjunto de vértices o nodos interconectados mediante aristas o arcos, donde cada arista tiene asignado un valor numérico conocido como peso o costo. Estos pesos representan la medida de la distancia, costo, tiempo u otra propiedad asociada a la conexión entre los nodos.
         </p>
 
         """,unsafe_allow_html=True)
-        st.image("images/grafos/grafos ponderados.png")
-st.divider()
+        st.image("images/grafos/grafos ponderados.png")    
 
-def usos_reglas():
+
+def  usos_reglas():
     st.subheader("Usos")
     st.markdown(
     """
@@ -136,11 +137,11 @@ def usos_reglas():
     """
     )
 
+
 def definciones():
-    st.divider()
     st.header("Adyacencia")
     st.markdown(
-    """
+     """
     La adyacencia en grafos se refiere a la relación entre dos nodos o vértices que están conectados por una arista. Dos nodos se consideran adyacentes si existe una arista que los conecta. En otras palabras, la adyacencia indica que dos nodos están directamente conectados en un grafo. La adyacencia puede ser bidireccional o unidireccional, dependiendo de si las aristas tienen una dirección o no. La información sobre la adyacencia de los nodos en un grafo es fundamental para realizar operaciones y análisis sobre el mismo, como encontrar rutas, determinar la conectividad o calcular distancias entre nodos.
     """
     )
@@ -151,7 +152,7 @@ def definciones():
     st.header("Caminos & longitud de un camino")
     st.markdown(
     """
-    un camino es una secuencia de nodos conectados en el que cada par de nodos consecutivos está unido por una arista. En otras palabras, es una ruta que permite ir desde un nodo inicial a un nodo final pasando por una serie de nodos intermedios, siguiendo las conexiones del grafo.
+     un camino es una secuencia de nodos conectados en el que cada par de nodos consecutivos está unido por una arista. En otras palabras, es una ruta que permite ir desde un nodo inicial a un nodo final pasando por una serie de nodos intermedios, siguiendo las conexiones del grafo.
 
     Un camino puede ser de longitud cero si se trata de un solo nodo, y puede ser de longitud uno si hay una arista directa entre dos nodos. La longitud de un camino se mide por el número de aristas que contiene.
 
@@ -181,7 +182,7 @@ def definciones():
     """
     En un grafo, se dice que es conexo si existe un camino entre cualquier par de nodos del grafo. En otras palabras, todos los nodos del grafo están conectados entre sí de alguna manera. Si hay al menos un par de nodos que no están conectados por ningún camino, entonces el grafo se considera no conexo. En un grafo no dirigido, la noción de conexidad implica que la relación de conexión es simétrica, es decir, si el nodo A está conectado con el nodo B, entonces el nodo B también está conectado con el nodo A.
     """
-    )
+    )   
 
     st.divider()
     st.header("grafo dirigido y  grafo no dirigido")
@@ -198,62 +199,38 @@ def definciones():
     """
     )
 
-
-
-
-
 def codigos():
     code_grafos()
+
 def dijkstra():
-    st.divider()
-    st.header("Algoritmo de Dijkstra")
-    st.markdown(
-    """
-    El algoritmo de Dijkstra es un algoritmo utilizado en teoría de grafos para encontrar el camino más corto entre un nodo de origen y todos los demás nodos en un grafo ponderado con aristas no negativas. Fue desarrollado por el científico de la computación holandés Edsger Dijkstra en 1956.
+    cod_dijkstra()
+    
 
-    El algoritmo de Dijkstra es ampliamente utilizado en aplicaciones que involucran redes de transporte, enrutamiento de paquetes en redes de comunicación, sistemas de navegación, optimización de rutas, entre otros. Su principal utilidad radica en encontrar el camino más corto desde un punto de origen a todos los demás puntos en un grafo, considerando el peso de las aristas.
-
-    El algoritmo funciona mediante la exploración de los nodos del grafo en un orden determinado, expandiendo gradualmente el conjunto de nodos visitados y calculando las distancias más cortas a los nodos no visitados. A medida que se expande el conjunto de nodos visitados, el algoritmo actualiza las distancias más cortas conocidas hasta el momento. Esto se hace mediante la comparación de las distancias actuales con las distancias calculadas a través de rutas alternativas.
-
-   """
-    )
-    code_dijkstra()
 def adye():
-  
     in_adya()
+
 def vec():
     in_vec()
-def matriz():
+
+def matriz():    
     in_matriz()
+
+
 def ejercicios_basicos():
-    st.divider()
     st.subheader("Ejercicio")
     st.markdown(
     """
-    A continuación te mostraremos ejercicios para que apliques lo aprendido, la solución se muestra una vez indiques en el botón
-            que quieres verla, sin embargo te recomendamos que intentes resolverlo tu solo para tu mejor comprensión. Recuerda que la mejor manera de 
-            aprender es haciéndolo tu mismo.
-    """ 
+    A continuación, te mostraremos ejercicios para que apliques lo aprendido, la solución se muestra una vez indiques en el botón
+            que quieres verla, sin embargo, te recomendamos que intentes resolverlo tu solo para tu mejor comprensión. Recuerda que la mejor manera de 
+            aprender es haciéndolo tú mismo.
+    """
     )
-
     ejercicio1()
     graficar_comunicacion_redes()
     ejercicio2()
     encontrar_camino_mas_corto()
     ejercicio3()
     encontrar_componentes_conectados()
-
-def bibliografia():
-        st.markdown("""<p>GRAFO:https://www.unipamplona.edu.co/unipamplona/portalIG/home_23/recursos/general/11072012/grafo3.pdf</p>""", unsafe_allow_html=True)
-        st.markdown("""<p>PARTES DE UN GRAFO:https://www.partesdel.com/partes_del_grafo.html</p>""", unsafe_allow_html=True)
-        st.markdown("""<p>Algoritmo DE DIJKSTRA:https://www.ecured.cu/Algoritmo_de_Dijkstra</p>""", unsafe_allow_html=True) 
-        st.markdown("""<p>M.ASYACENCIA:https://es.wikipedia.org/wiki/Matriz_de_adyacencia</p>""", unsafe_allow_html=True) 
-        st.markdown("""<p>M.VECTOR:https://es.khanacademy.org/math/multivariable-calculus/thinking-about-multivariable-function/x786f2022:vectors-and-matrices/a/matrices--intro-mvc#:~:text=Vectores%20como%20matrices,times%201%20n%C3%971%20).</p>""", unsafe_allow_html=True)
-        st.markdown("""<p>M.LISTA:https://www.ugr.es/~alaminos/resources/Inform/2011/2012/maxima-screen/maxima-03s.pdf</p>""", unsafe_allow_html=True)  
-        st.markdown("""<p></p>""", unsafe_allow_html=True) 
-        st.markdown("""<p></p>""", unsafe_allow_html=True) 
-
-    
 
 def page():
     #menu donde el  usrauario podra ver los temas y codigos que tiene que ver con un grafo#
@@ -271,8 +248,7 @@ def page():
             'Codigo de matriz de adyacencia',
             'Codigo de matriz de vectores',
             'Codigo de matriz de lista',
-            'Ejercicios básicos de comprensión',
-            'Bibliografia'
+            'Ejercicios básicos de comprensión'
         )
     )
     #opciones delm menu
@@ -295,10 +271,4 @@ def page():
         matriz()
     elif opcion == 'Ejercicios básicos de comprensión':
         ejercicios_basicos()
-    elif opcion == 'Ejercicio de aplicación':
-        st.write('EJERCICIO AQUÍ')
-    elif opcion == 'Bibliografia':
-        bibliografia()
-       
 page()
-
