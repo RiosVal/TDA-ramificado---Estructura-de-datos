@@ -2,12 +2,17 @@ import streamlit as st
 from codigos.monticulos.monticulos import *
 from codigos.monticulos.ejercicios import *
 from codigos.monticulos.rbHeaps import *
-
+from streamlit_extras.switch_page_button import switch_page
+from codigos.monticulos.ejercicioAplicativo import *
 
 def intro():
+    """
+    Esta funcion muestra en pantalla la informacion basica de los monticulos
+    """
+
     st.header('⛰️')
-    st.write("<h1>Monticulos</h1>", unsafe_allow_html=True)
-    st.write(
+    st.write("<h1>Monticulos</h1>", unsafe_allow_html=True) # Título principal usando etiquetas HTML
+    st.write( # Descripción de los montículos utilizando etiquetas HTML
         """
             <div style="text-align: justify;"><p> 
             Los montículos (Heaps) son estructuras de datos que permite la extracción de los
@@ -18,22 +23,28 @@ def intro():
         """,
         unsafe_allow_html=True
     )
-    botonCodeHeap = st.empty()
+
+
+    botonCodeHeap = st.empty()  
     mostrar = botonCodeHeap.button("Mostrar codigo")
 
-    if mostrar:
+    if mostrar: #Verifica si el boton se ha activado
         botonCodeHeap.empty()
         st.button("Ocultar código")
         codeMonticulos()
 
 
 def monticulosMaxMin():
+    """
+    Esta funcion muestra en pantalla toda la informacion de monticulos maximos y minimos.
+    """
 
     st.write('<h2>Monticulos maximos y minimos</h2>', unsafe_allow_html=True)
 
     st.image("images/monticulos/max-min-heap.png")
 
-    heapMin, heapMax = st.tabs(["Monticulos Minimos", "Monticulos Maximos"])
+    heapMin, heapMax = st.tabs(["Monticulos Minimos", "Monticulos Maximos"]) 
+    #Se crea una tabla para mostrar la informacion de los dos monticulos
 
     with heapMin:
         st.write("""<div style="text-align: center;"><h2>Monticulos Minimos</h2></div>""", unsafe_allow_html=True)
@@ -48,7 +59,10 @@ def monticulosMaxMin():
                     """, unsafe_allow_html=True)
 
         st.write("<h5>Codigo en python:</h5>", unsafe_allow_html=True)
-        codeMonticuloMin()
+        
+        #Se hace llamado a la siguiente funcion, la cual muestra en pantalla el codigo de monticulos minimos en python
+        codeMonticuloMin() 
+        
 
     with heapMax:
         st.write("""<div style="text-align: center;"><h2>Monticulos Maximos</h2></div>""", unsafe_allow_html=True)
@@ -64,42 +78,26 @@ def monticulosMaxMin():
                     """, unsafe_allow_html=True)
 
         st.write("<h5>Codigo en python:</h5>", unsafe_allow_html=True)
+
+        #Se hace llamado a la siguiente funcion, la cual muestra en pantalla el codigo de monticulos maximos en python
         codeMonticuloMax()
 
 
 def importante_saber():
-    
+    """
+    Esta funcion muestra en pantalla informacion importante sobre el tema principal "Monticulos"
+    """
+
     st.markdown("<h2>Importante entender</h2>", unsafe_allow_html=True)
     st.markdown("Los monticulos se componen de los siguientes elementos:", unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns(3)
+    botonInfoArboles = st.empty()  
+    mostrar = botonInfoArboles.button("Mostrar información")
 
-    with col1:
-        st.markdown("<b>Nodo</b>: cada elemento que contiene un árbol", unsafe_allow_html=True)
-        st.markdown("<b>Nodo raíz</b>: primer nodo de un árbol", unsafe_allow_html=True)
-        st.markdown("<b>Nodo padre</b>: aquellos nodos que tienen al menos un hijo y está directamente superior a el", unsafe_allow_html=True)
-        st.markdown("<b>Nodo hijo</b>: todos quellos que tienen un padre", unsafe_allow_html=True)    
-        st.markdown("<b>Nodo hermano</b>: los nodos que comparten a un mismo padre", unsafe_allow_html=True)
-        st.markdown("<b>Nodo hoja</b>: nodos que no tienen hijos", unsafe_allow_html=True)
-        st.markdown("<b>Nodo rama</b>: aquellos nodos que no son raíz y tienen al menos un hijo", unsafe_allow_html=True)
-        st.markdown("<b>Decendiente</b>: nodo que está en un nivel inferior en relación con otro nodo específico", unsafe_allow_html=True)
-    with col2:
-        st.markdown("<b>Ancestro</b>: nodo que está en un nivel superior en relación con otro nodo específico", unsafe_allow_html=True)
-        st.markdown("<b>Nodo interno</b>: nodo que tiene al menos un hijo", unsafe_allow_html=True)
-        st.markdown("<b>Camino</b>: secuencia de nodos conectados entre sí en el árbol", unsafe_allow_html=True)
-        st.markdown("<b>Nivel de un nodo</b>: posición relativa de un nodo en el árbol", unsafe_allow_html=True)
-        st.markdown("<b>Nivel de un árbol</b>: es el nivel más alto entre todos los nodos del árbol", unsafe_allow_html=True)
-        st.markdown("<b>Altura de un nodo</b>: es la longitud del camino más largo desde ese nodo hasta un nodo terminal", unsafe_allow_html=True)
-        st.markdown("<b>Altura de un árbol</b>: es la longitud máxima del camino desde la raíz hasta el nodo más alejado", unsafe_allow_html=True)
-    with col3:
-        st.markdown("<b>Peso de un árbol</b>: suma de los persos de todos los nodos de ese árbol", unsafe_allow_html=True)
-        st.markdown("<b>Orden</b>: número máximo de hijos que puede tener un nodo", unsafe_allow_html=True)
-        st.markdown("<b>Grado</b>: numero mayor d ehijos que tiene alguno de los nodos del árbol", unsafe_allow_html=True)
-        st.markdown("<b>Profundidad</b>: distancia entre un nodo dado y la raíz del árbol", unsafe_allow_html=True)
-        st.markdown("<b>Bosque</b>: coleccion de árboles disjuntos, donde cada átbol puede tener su propia raíz y nodos", unsafe_allow_html=True)
-        st.markdown("<b>Sub-árbol</b>: es todo árbol generado a partir de una sección determinada del árbol", unsafe_allow_html=True)
-        st.markdown("<b>Peso de un nodo</b>: valor asociado o atributo numérico asociado al nodo", unsafe_allow_html=True)
-#Caracteristicas de los monticulos 
+    if mostrar: #Verifica si el boton se ha activado
+        switch_page("arboles") #Muestra la informacion base de un arbol
+
+    #Caracteristicas de los monticulos 
     st.subheader('Caracteristicas:')
     st.markdown(
         '''
@@ -112,7 +110,7 @@ def importante_saber():
         - Toda lista ordenada es un monticulo.
         '''
     )
-# Carateristicas de los monticulos 
+    # Carateristicas de los monticulos 
     st.subheader('Propiedades:')
     st.markdown(
 
@@ -129,25 +127,37 @@ def importante_saber():
         '''
     )
 
-def tabsArbol():
-    
-    tab1, tab2, tab3, tab4 = st.tabs(["Árbol", "Raíz, rama, hoja", "Nodos padre e hijos", "Hermanos"])
 
-    with tab1:
-        st.image("images/arboles/arbol.png")
-    with tab2:
-        st.image("images/arboles/padreHermanos.png")
-    with tab3:
-        st.image("images/arboles/padreHijo.png")
-    with tab4:
-        st.image("images/arboles/RaizRamaHoja.png")
+def diferencias():
+    st.subheader('Como diferenciar un arbol binario de un monticulos(Heap)')
+    st.markdown(''' 
+                Un arbol es un conjunto finitos de nodos,ademas puede ser, un conjunto vacio o un conjunto que contiene un nodo raiz y dos arboles disjuntos
+                Algunas de sus caracteristicas que se distinguen de un monticulos son:
+                - Altura: Los árboles son generalmente más altos que otras plantas, como arbustos o hierbas. Tienen un tronco largo y una estructura ramificada en la parte superior.
+                - Ramificación: Los árboles suelen tener ramas que se extienden desde el tronco principal y se subdividen en ramas más pequeñas. Esta estructura ramificada es una característica típica de los árboles.
+                - Raíces: Los árboles tienen raíces bien desarrolladas que se extienden en el suelo para proporcionar soporte y absorber nutrientes. Las raíces suelen ser más grandes y profundas en comparación con otras plantas.
+                - Crecimiento lento: Los árboles generalmente tienen un crecimiento lento y pueden tardar años o décadas en alcanzar su tamaño completo. Su crecimiento está determinado por diversos factores, como la especie, las condiciones ambientales y la disponibilidad de recursos.
+                '''
+                ''' 
+                Mientras que un moticulo es un arbol binario completo el cual permite la extraccion de estos de forma ordenada
+                Sus caracteristicas son:
+                - Propiedad del montículo: Un montículo cumple con la propiedad del montículo, que puede ser de dos tipos: montículo máximo o montículo mínimo. En un montículo máximo, el valor almacenado en cada nodo es mayor o igual que los valores almacenados en sus nodos hijos. En un montículo mínimo, el valor almacenado en cada nodo es menor o igual que los valores almacenados en sus nodos hijos.
+                - Estructura completa: Un montículo se puede representar mediante un árbol binario completo, lo que significa que todos los niveles del árbol están completamente llenos, excepto posiblemente el último nivel, que se llena de izquierda a derecha. Esta estructura completa permite una representación eficiente del montículo utilizando un arreglo.
+                - Operaciones de inserción y extracción: Los montículos suelen utilizarse para implementar colas de prioridad, ya que permiten la inserción eficiente de elementos y la extracción del elemento de mayor o menor prioridad según el tipo de montículo. Las operaciones de inserción y extracción mantienen la propiedad del montículo.
+                
+                ''')
 
 
 def ejercicios():
+    """
+        Esta funcion muestra en pantalla ejercicios practicos para entender mejor el tema, haciendo
+    """
     st.write('<div style="text=align: center;"><h2>Ejercicios</h2></div>', unsafe_allow_html=True)
     st.write("""A continuación te mostraremos ejercicios para que apliques lo aprendido, la solución se muestra una vez indiques en el botón
             que quieres verla, sin embargo te recomendamos que intentes resolverlo tu solo para tu mejor comprensión. Recuerda que la mejor manera de 
             aprender es haciéndolo tu mismo.""")
+    
+    #Se hace el llamado de los ejercicios ubicados en ./codigos/monticulos/ejercicios.py para mostrarlos en pantalla
     ejercicio1()
     ejercicio2()
     ejercicio3()
@@ -156,7 +166,11 @@ def ejercicios():
 
 
 def tipos():
-    st.write("<br><h2>Otros tipos de monticulos</h2>", unsafe_allow_html=True)
+    """
+        Mediante el uso de "St.tabs" se muestra la informacion de otros tipos de monticulos y sus caracteristicas
+    """
+    
+    st.write("<h2>Otros tipos de monticulos</h2>", unsafe_allow_html=True)
     tipo1, tipo2, tipo3, tipo4, tipo5 = st.tabs(["Binomial", "Fibonacci", "Paridad", "Leftist", "Par Binario"])
 
     with tipo1: #Info Monticulo Binomial
@@ -226,197 +240,18 @@ def tipos():
                     - La unión de dos montículos de par binario se realiza combinando los elementos en función de la paridad de sus índices.
                     """, unsafe_allow_html=True)
 
-def tda_monticulos():
-    st.write("<h3>Aplicacion de TDA en monticulos:</h3>", unsafe_allow_html=True)
-    st.write('''Para la aplicacion de una tda en los monticulos necesitaremos 
-    un vector con n elementos que estos seran llamados <u>Heap</u> este sera util para representar un arbol binario,
-    ademas usaremos funciones que definiran cada uno de su funcionamiento''',unsafe_allow_html=True)
-    st.subheader("Implementacion")
-    opcion = st.selectbox(
-        "",
-        (
-            "__init__(self,tamaño)",
-            "Crear_monticulo(self,tamaño)",
-            "agregar(self,dato),quitar(self),flotar(self,indice)",
-            "Hundir(self,indice)",
-            "ordenar y revisar(self)",
-            "monticulizar(self)",
-            'Codigo Completo')
-    )
-
-    if opcion == "__init__(self,tamaño)":
-        st.write('Crear una clase Monticulo',unsafe_allow_html=True)
-        code = '''
-      class Monticulo:
-        def __init__(self, tamaño):
-            self.heap = [None] * tamaño
-            self.size = 0'''
-    elif opcion == "Crear_monticulo(self,tamaño)":
-        st.write('- Crea y devuelve un montículo vacío con la cantidad de elementos,determinado por el tamaño ingresado',unsafe_allow_html=True)
-        code = '''
-        def crear_monticulo(self, tamaño):
-        self.heap = [None] * tamaño
-        self.size = 0'''
-    elif opcion == "agregar(self,dato),quitar(self),flotar(self,indice)":
-        st.write('''- Agregar-Inserta un elemento al final del montículo y luego lo flota hasta que dicho elemento cumpla la propiedad de orden
-                    - Quitar-Quita y devuelve el máximo o mínimo elemento del montículo dependiendo de su tipo, es decir el dato que se ubica en la raíz del árbol , y en su lugar se coloca 
-                            el último elemento del montículo y luego lo hunde hasta que cumpla la propiedad de orden
-                    - Flotar-Flota el dato almacenado en el montículo desde el índice indicado 
-                            hasta que cumpla la propiedad de orden''', unsafe_allow_html=True)
-        code = '''
-   def agregar(self, dato):
-        if self.size >= len(self.heap):
-            # El montículo está lleno
-            return
-        self.heap[self.size] = dato
-        self.flotar(self.size)
-        self.size += 1
-
-    def quitar(self):
-        if self.size == 0:
-            # El montículo está vacío
-            return None
-        dato = self.heap[0]
-        self.size -= 1
-        self.heap[0] = self.heap[self.size]
-        self.hundir(0)
-        return dato
-
-    def flotar(self, índice):
-        padre = (índice - 1) // 2
-        while índice > 0 and self.heap[índice] > self.heap[padre]:
-            self.heap[índice], self.heap[padre] = self.heap[padre], self.heap[índice]
-            índice = padre
-            padre = (índice - 1) // 2'''
-    elif opcion == "Hundir(self,indice)":
-        st.write('- Hunde el dato almacenado en el montículo desde el índice indicado hasta que cumpla la propiedad de orden', unsafe_allow_html=True)
-        code = '''
-        def hundir(self, índice):
-        hijo_izquierdo = 2 * índice + 1
-        hijo_derecho = 2 * índice + 2
-        índice_mayor = índice
-
-        if hijo_izquierdo < self.size and self.heap[hijo_izquierdo] > self.heap[índice_mayor]:
-            índice_mayor = hijo_izquierdo
-        if hijo_derecho < self.size and self.heap[hijo_derecho] > self.heap[índice_mayor]:
-            índice_mayor = hijo_derecho
-
-        if índice_mayor != índice:
-            self.heap[índice], self.heap[índice_mayor] = self.heap[índice_mayor], self.heap[índice]
-            self.hundir(índice_mayor)
-'''
-    elif opcion == "ordenar y revisar(self)":
-        st.write('''-  Devuelve verdadero (true) si el montículo no contiene elementos
-                    -  Devuelve verdadero (true) si el montículo no puede almacenar más elementos
-                    -  Devuelve la cantidad de elementos del montículo''', 
-                unsafe_allow_html=True)
-        code = '''
-            def montículo_vacio(self):
-        return self.size == 0
-
-    def montículo_lleno(self):
-        return self.size == len(self.heap)
-
-    def tamaño(self):
-        return self.size'''
-
-    elif opcion == "monticulizar(self)":
-        st.write(' Convierte un vector de elementos en un montículo',unsafe_allow_html=True)
-        code = '''
-           @classmethod
-    def monticulizar(cls, elementos):
-        tamaño = len(elementos)
-        monticulo = cls(tamaño)
-        monticulo.heap = elementos
-        monticulo.size = tamaño
-
-        for i in range(tamaño // 2 - 1, -1, -1):
-            monticulo.hundir(i)
-
-        return monticulo'''
-    elif opcion == "Codigo Completo":
-        code = '''
-           class Monticulo:
-    def __init__(self, tamaño):
-        self.heap = [None] * tamaño
-        self.size = 0
-
-    def crear_monticulo(self, tamaño):
-        self.heap = [None] * tamaño
-        self.size = 0
-
-    def agregar(self, dato):
-        if self.size >= len(self.heap):
-            # El montículo está lleno
-            return
-        self.heap[self.size] = dato
-        self.flotar(self.size)
-        self.size += 1
-
-    def quitar(self):
-        if self.size == 0:
-            # El montículo está vacío
-            return None
-        dato = self.heap[0]
-        self.size -= 1
-        self.heap[0] = self.heap[self.size]
-        self.hundir(0)
-        return dato
-
-    def flotar(self, índice):
-        padre = (índice - 1) // 2
-        while índice > 0 and self.heap[índice] > self.heap[padre]:
-            self.heap[índice], self.heap[padre] = self.heap[padre], self.heap[índice]
-            índice = padre
-            padre = (índice - 1) // 2
-
-    def hundir(self, índice):
-        hijo_izquierdo = 2 * índice + 1
-        hijo_derecho = 2 * índice + 2
-        índice_mayor = índice
-
-        if hijo_izquierdo < self.size and self.heap[hijo_izquierdo] > self.heap[índice_mayor]:
-            índice_mayor = hijo_izquierdo
-        if hijo_derecho < self.size and self.heap[hijo_derecho] > self.heap[índice_mayor]:
-            índice_mayor = hijo_derecho
-
-        if índice_mayor != índice:
-            self.heap[índice], self.heap[índice_mayor] = self.heap[índice_mayor], self.heap[índice]
-            self.hundir(índice_mayor)
-
-    def montículo_vacio(self):
-        return self.size == 0
-
-    def montículo_lleno(self):
-        return self.size == len(self.heap)
-
-    def tamaño(self):
-        return self.size
-
-    @classmethod
-    def monticulizar(cls, elementos):
-        tamaño = len(elementos)
-        monticulo = cls(tamaño)
-        monticulo.heap = elementos
-        monticulo.size = tamaño
-
-        for i in range(tamaño // 2 - 1, -1, -1):
-            monticulo.hundir(i)
-
-        return monticulo'''
-    st.code(code, language='python')
-
-
-
 def page():
+    """
+        Esta funcion muestra la introduccion y el menu para desplegar cada parte del tema individual, para un mejor orden
+    """
     intro()
     opcion = st.selectbox(
         'Escoge el tema a desplegar',
         (
             '',
             'Definiciones importantes',
-            'Tipos de monticulos',
             'Monticulos MaxMin',
+            'Tipos de monticulos',
             'Aplicacion TDA',
             'Ejercicios básicos de comprensión',
             'Ejercicio de aplicación'
@@ -424,16 +259,17 @@ def page():
     )
     if opcion == 'Definiciones importantes':
         importante_saber()
-        tabsArbol()
-    elif opcion == 'Tipos de monticulos':
-        tipos()
+        diferencias()
     elif opcion =='Monticulos MaxMin':
         monticulosMaxMin()
+    elif opcion == 'Tipos de monticulos':
+        tipos()
     elif opcion == 'Aplicacion TDA':
         tda_monticulos()
     elif opcion == 'Ejercicios básicos de comprensión':
         ejercicios()
     elif opcion == 'Ejercicio de aplicación':
-        st.write('EJERCICIO AQUÍ...')
+        menu_ejercicio_aplicativo()
 
+#Se llama a la funcion de pagina principal de los monticulos
 page()
