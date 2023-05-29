@@ -11,6 +11,7 @@ Este proyecto utiliza streamlit, por lo tanto para que funcione debes seguir los
     1. pip install streamlit
     2. pip install streamlit-extras
     3. pip install networkx
+    4. pip install scikit-learn
 3. Una vez creado el entorno virtual con las librerias necesarias instaladas, corre el programa pegando el siguiente comando: streamlit run homepage.py
 
 ¡SI YA TIENES EL ENTORNO VIRTUAL CREADO DENTRO DE TU CARPETA!
