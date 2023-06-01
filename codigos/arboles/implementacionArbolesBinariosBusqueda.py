@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-from codigos.arboles.arbolesBinariosBusqueda import ArbolBinario
-=======
 from codigos.arboles.TDAarbolBinario import BinaryTree
->>>>>>> Valeria
 import streamlit as st
 
 def insertar_nodos() -> BinaryTree:
