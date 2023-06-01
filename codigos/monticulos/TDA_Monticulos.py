@@ -73,4 +73,4 @@ class TdaMonticulo:
 
         st.write("Elementos del montículo:")
         for i, avion in heap:
-            st.write(f"{i})  Tipo: {avion[1]}   -   Prioridad: {avion[0]}")
+            st.write(f"{i})  Tipo: {avion[1]}   -   Prioridad: {avion[1]}")
