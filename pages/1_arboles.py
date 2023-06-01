@@ -142,9 +142,11 @@ def usos_binarios():
         y la búsqueda de elementos en aplicaciones de búsqueda. También son utilizados en algoritmos de 
         ordenamiento y en la implementación de estructuras de datos como colas de prioridad y conjuntos'''
     )
+
+def grafica_binarios_busqueda():
     arbol_busqueda = insertar_nodos()
     buscar_eliminar_nodo(arbol_busqueda)
-    arbol_busqueda.graficar()
+    arbol_busqueda.plot()
 
 def binarios_busqueda():
     """Visualización de información sobre árboles binarios de búsqueda"""
@@ -158,6 +160,7 @@ def binarios_busqueda():
         '''
     )
     usos_binarios()
+    grafica_binarios_busqueda()
 
 def arbolesAVL():
     """Visualización de información sobre árboles binarios de búsqueda avanzados junto con su implementación"""
