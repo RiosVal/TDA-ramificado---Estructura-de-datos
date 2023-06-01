@@ -170,6 +170,7 @@ def arbolesAVL():
         búsqueda para indexar y clasificar resultados, en compiladores para optimizar el análisis sintáctico y semántico, y en muchas 
         otras aplicaciones.[6]'''
     )
+    codeAVLtree()
     impAVL()
 
 def rojo_negro():
@@ -205,32 +206,20 @@ def rojo_negro():
 
 def tipos():
     """Visualización de los tipos de árboles"""
-    st.header('Tipos')
-    col1, col2 = st.columns(2)
-
-    with col1:
+    st.header('Tipos de árboles')
+    tipos_arboles = ['Árbol n-ario', 'Árbol binario', 'Árboles binarios de búsqueda', 'Árboles de búsqueda avanzados (AVL)', 'Árboles rojo negro']
+    n_ario, binario, binario_busqueda, avl, arbol_rojo_negro = st.tabs(tipos_arboles)
+    with n_ario:
         n_arios()
-    with col2:
+    with binario:
         binarios()
-    
-    reglas_binarios()
-    code_binary_tree()
-    
-    opcion = st.selectbox(
-        'Otros tipos de árboles',
-        (
-            ' ',
-            'Árboles binarios de búsqueda',
-            'Árboles de búsqueda avanzados (AVL)',
-            'Árboles rojo negro'
-        )
-    )
-
-    if opcion == 'Árboles binarios de búsqueda':
+        reglas_binarios()
+        code_binary_tree()
+    with binario_busqueda:
         binarios_busqueda()
-    elif opcion == 'Árboles de búsqueda avanzados (AVL)':
+    with avl:
         arbolesAVL()
-    elif opcion == 'Árboles rojo negro':
+    with arbol_rojo_negro:
         rojo_negro()
     
 def ejercicios_basicos():
