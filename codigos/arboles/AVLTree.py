@@ -164,7 +164,6 @@ class AVLTree(object):
         else:
             return self.search(root.r, key)
 
-
     def delete(self, root, key):
         """Elimina un nodo en un árbol AVL
 

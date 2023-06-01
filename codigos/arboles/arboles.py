@@ -297,5 +297,262 @@ def codigo_huffman():
             return decoded'''
     st.code(code, language='python')
 
+def codeAVLtree():
+    code_estructura = '''
+    class treeNode(object):
+    """Definición de la clase treeNode para el árbol AVL 
 
-    
+        Args:
+            object (_type_): _description_
+        """
+        def __init__(self, value):
+            self.value = value
+            self.l = None
+            self.r = None
+            self.h = 1
+ 
+ 
+    class AVLTree(object):'''
+    code_insert = '''
+    def insert(self, root, key):
+        """Implementación de la inserción de un nodo en un árbol AVL
+
+        Args:
+            root (treeNode): el nodo raíz del árbol donde se desea insertar el nuevo nodo.
+            key (any): el valor del nuevo nodo que se va a insertar.
+
+        Returns:
+            treeNode: nodo raíz del árbol actualizado después de la inserción y las rotaciones.
+        """
+        if not root:
+            return treeNode(key)
+        elif key < root.value:
+            root.l = self.insert(root.l, key)
+        else:
+            root.r = self.insert(root.r, key)
+ 
+        root.h = 1 + max(self.getHeight(root.l),
+                         self.getHeight(root.r))
+ 
+        b = self.getBal(root)
+ 
+        if b > 1 and key < root.l.value:
+            return self.rRotate(root)
+ 
+        if b < -1 and key > root.r.value:
+            return self.lRotate(root)
+ 
+        if b > 1 and key > root.l.value:
+            root.l = self.lRotate(root.l)
+            return self.rRotate(root)
+ 
+        if b < -1 and key < root.r.value:
+            root.r = self.rRotate(root.r)
+            return self.lRotate(root)
+ 
+        return root
+    '''
+    code_lrotate = '''
+    def lRotate(self, z):
+        """Rotación hacia la izquierda en un árbol AVL. Se realiza alrededor de un nodo z, que se convierte en el hijo izquierdo del nodo rotado.
+
+        Args:
+            z (treeNode):  nodo en torno al cual se realiza la rotación hacia la izquierda.
+
+        Returns:
+            treeNode: nuevo nodo raíz después de la rotación hacia la izquierda.
+        """
+        y = z.r
+        T2 = y.l
+ 
+        y.l = z
+        z.r = T2
+ 
+        z.h = 1 + max(self.getHeight(z.l),
+                      self.getHeight(z.r))
+        y.h = 1 + max(self.getHeight(y.l),
+                      self.getHeight(y.r))
+ 
+        return y
+    '''
+    code_rrotate = '''
+    def rRotate(self, z):
+        """Rotación hacia la derecha en un árbol AVL. Se realiza alrededor de un nodo z, que se convierte en el hijo derecho del nodo rotado.
+
+        Args:
+            z (treeNode): nodo en torno al cual se realiza la rotación hacia la derecha.
+
+        Returns:
+            treeNode: nuevo nodo raíz después de la rotación hacia la derecha.
+        """
+        y = z.l
+        T3 = y.r
+ 
+        y.r = z
+        z.l = T3
+ 
+        z.h = 1 + max(self.getHeight(z.l),
+                      self.getHeight(z.r))
+        y.h = 1 + max(self.getHeight(y.l),
+                      self.getHeight(y.r))
+ 
+        return y
+    '''
+    code_getHeight = '''
+    def getHeight(self, root):
+        """Calcula la altura del árbol
+
+        Args:
+            root (treeNode): raíz de árbol AVL
+
+        Returns:
+            (int): retorna la altura del árbol, 0 si el árbol no tiene raíz.
+        """
+        if not root:
+            return 0
+ 
+        return root.h
+    '''
+    code_getBal = '''
+    def getBal(self, root):
+        """Calcula el factor de equilibrio de un nodo en un árbol AVL. El factor de equilibrio se 
+        define como la diferencia entre la altura del subárbol izquierdo y la altura del subárbol derecho.
+
+        Args:
+            root (treeNode): el nodo para el cual se desea calcular el factor de equilibrio.
+
+        Returns:
+            int: Devuelve la diferencia entre estas dos alturas, si el nodo root es None devuelve 0
+        """
+        if not root:
+            return 0
+ 
+        return self.getHeight(root.l) - self.getHeight(root.r)
+    '''
+    code_preorder = '''
+    def preOrder(self, root):
+        """Realiza el recorrido en preorden del árbol (nodo raíz, luego el subárbol izquierdo y finalmente el subárbol derecho).
+
+        Args:
+            root (treeNode): nodo raíz del árbol
+        """
+        if not root:
+            return
+ 
+        print("{0} ".format(root.value), end="")
+        self.preOrder(root.l)
+        self.preOrder(root.r)
+    '''
+    code_search = '''
+    def search(self, root, key):
+        """Realiza una búsqueda para encontrar si un valor key se encuentra en el árbol.
+
+        Args:
+            root (treeNode): nodo raíz del árbol
+            key (any):  valor que a buscar
+
+        Returns:
+            _type_: _description_
+        """
+        if not root:
+            return False
+        elif key == root.value:
+            return True
+        elif key < root.value:
+            return self.search(root.l, key)
+        else:
+            return self.search(root.r, key)
+    '''
+    code_delete = '''
+    def delete(self, root, key):
+        """Elimina un nodo en un árbol AVL
+
+        Args:
+            root (treeNode): nodo raíz del árbol en el que se desea eliminar el nodo.
+            key (any):  valor del nodo que se desea eliminar.
+
+        Returns:
+            treeNode: nodo raíz actualizado después de la eliminación y las rotaciones.
+        """
+        if not root:
+            return root
+
+        elif key < root.value:
+            root.left = self.delete(root.left, key)
+
+        elif key > root.value:
+            root.right = self.delete(root.right, key)
+
+        else:
+            if root.left is None:
+                temp = root.right
+                root = None
+                return temp
+
+            elif root.right is None:
+                temp = root.left
+                root = None
+                return temp
+
+            temp = self.getMinValueNode(root.right)
+            root.key = temp.key
+            root.right = self.delete(root.right,
+                                      temp.value)
+
+        if root is None:
+            return root
+
+        root.height = 1 + max(self.getHeight(root.left),
+                              self.getHeight(root.right))
+
+        balance = self.getBalance(root)
+
+        if balance > 1 and self.getBalance(root.left) >= 0:
+            return self.rightRotate(root)
+
+        if balance < -1 and self.getBalance(root.right) <= 0:
+            return self.leftRotate(root)
+
+        if balance > 1 and self.getBalance(root.left) < 0:
+            root.left = self.leftRotate(root.left)
+            return self.rightRotate(root)
+
+        if balance < -1 and self.getBalance(root.right) > 0:
+            root.right = self.rightRotate(root.right)
+            return self.leftRotate(root)
+
+        return root
+    '''
+    st.subheader('Estructura de un árbol AVL')
+    st.code(code_estructura, language="python")
+    st.subheader('Eventos')
+    option = st.selectbox(
+        "",
+        (
+            "Insertar (insert)",
+            "Rotar a la izquierda (lrotate)",
+            "Rotar a la derecha (rRotate)",
+            "Altura (get_hight)",
+            "Balance (getBal)",
+            "Pre orden (preorder)",
+            "Buscar (search)",
+            "Eliminar (delete)"
+        )
+    )
+    if option == "Insertar (insert)":
+        st.code(code_insert, language="python")
+    elif option == "Rotar a la izquierda (lrotate)":
+        st.code(code_lrotate, language='python')
+    elif option == "Rotar a la derecha (rRotate)":
+        st.code(code_rrotate, language='python')
+    elif option == "Altura (get_hight)":
+        st.code(code_getHeight, language='python')
+    elif option == "Balance (getBal)":
+        st.code(code_getBal, language='python')
+    elif option == "Pre orden (preorder)":
+        st.code(code_preorder, language='python')
+    elif option == "Buscar (search)":
+        st.code(code_search, language='python')
+    elif option == "Eliminar (delete)":
+        st.code(code_delete, language='python')
+

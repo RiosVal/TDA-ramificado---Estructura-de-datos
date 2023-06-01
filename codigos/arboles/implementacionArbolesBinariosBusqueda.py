@@ -1,13 +1,17 @@
+<<<<<<< HEAD
 from codigos.arboles.arbolesBinariosBusqueda import ArbolBinario
+=======
+from codigos.arboles.TDAarbolBinario import BinaryTree
+>>>>>>> Valeria
 import streamlit as st
 
-def insertar_nodos() -> ArbolBinario:
+def insertar_nodos() -> BinaryTree:
     """Permite al usuario insertar nodos en un árbol binario interactivo
 
     Returns:
         ArbolBinario: arbol binario creado
     """
-    arbol = ArbolBinario()
+    arbol = BinaryTree()
     # Verifica si la lista ya existe en el estado de la sesión
     if 'lista_nodos' not in st.session_state:
         st.session_state.lista_nodos = []  # Crea una lista vacía en el estado de la sesión
@@ -19,11 +23,11 @@ def insertar_nodos() -> ArbolBinario:
     if st.button("Insertar"):
         st.session_state.lista_nodos.append(numero)
     for numero in st.session_state.lista_nodos:
-        arbol.insertar(numero)
+        arbol.add(numero)
     
     return arbol
 
-def buscar_eliminar_nodo(arbol: ArbolBinario):
+def buscar_eliminar_nodo(arbol: BinaryTree):
     """Permite al usuario buscar y eliminar nodos en el árbol binario
 
     Args:
@@ -33,12 +37,12 @@ def buscar_eliminar_nodo(arbol: ArbolBinario):
     with eliminados:
         num_eliminar = st.number_input('Número a eliminar')
         if st.button('Eliminar'):
-            arbol.eliminar(num_eliminar)
+            arbol.delete(num_eliminar)
     with buscados:
         num_buscado = st.number_input('Número a buscar')
         if st.button('Buscar'):
-            buscado = arbol.buscar(num_buscado)
-            if buscado == True:
+            buscado = arbol.search(num_buscado)
+            if buscado != None:
                 st.write('El número se encuentra en el árbol')
             else:
                 st.write('El número no se encuentra en el árbol')
