@@ -1,4 +1,4 @@
-from codigos.arboles.AVLTree import *
+from codigos.arboles.AVLTree import AVLTree
 
 
 def impAVL():

@@ -1,4 +1,4 @@
-from codigos.arboles.huffman import *
+from codigos.arboles.huffman import codificar_huffman, decodificar_huffman
 import streamlit as st
 
 def uso_huffman():

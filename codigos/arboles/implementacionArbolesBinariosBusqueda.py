@@ -1,4 +1,4 @@
-from codigos.arboles.arbolesBinariosBusqueda import *
+from codigos.arboles.arbolesBinariosBusqueda import ArbolBinario
 import streamlit as st
 
 def insertar_nodos() -> ArbolBinario:

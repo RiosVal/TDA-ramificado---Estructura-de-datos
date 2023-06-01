@@ -1,6 +1,4 @@
-import streamlit as st
 import networkx as nx
-import matplotlib.pyplot as plt
 
 # Crear una instancia de los grafos
 graph_min_heap = nx.Graph()
