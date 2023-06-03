@@ -1,6 +1,8 @@
 import streamlit as st
 from codigos.monticulos.heap import *
 import heapq
+import io
+import matplotlib.pyplot as plt
 
 def ejercicio1():
 
@@ -59,8 +61,8 @@ def ejercicio1():
     if inputuser:
         numeros = [int(num.strip()) for num in inputuser.split(',')]
 
-    # Mostrar los números ingresados
-    st.write("Números ingresados:", numeros)
+        # Mostrar los números ingresados
+        st.write("Números ingresados:", numeros)
 
     if numeros:
         # Construir un heap a partir de los números ingresados
@@ -77,7 +79,7 @@ def ejercicio1():
         
         N_pequeños = heapq.nsmallest(p, numeros)
 
-        st.write(f"{p}    elementos mas pequeños:", N_pequeños)
+        st.write(f"{p} elementos mas pequeños:", N_pequeños)
 
         g = st.number_input("Ingrese el número de elementos más grandes", min_value=1, max_value=len(numeros),
                                 value=1, step=1)
@@ -85,6 +87,28 @@ def ejercicio1():
         N_grande = heapq.nlargest(g, numeros)
 
         st.write(f"{g} elementos más grandes:", N_grande)
+
+         # Crear el grafo
+        G = nx.DiGraph()
+
+        # Agregar nodos para los números ingresados
+        for i, num in enumerate(numeros):
+            G.add_node(num)
+
+        # Agregar aristas para las relaciones del montículo
+        for i, num in enumerate(numeros):
+            if 2 * i + 1 < len(numeros):
+                G.add_edge(num, numeros[2 * i + 1])
+            if 2 * i + 2 < len(numeros):
+                G.add_edge(num, numeros[2 * i + 2])
+
+        # Dibujar el grafo
+        plt.figure(figsize=(8, 6))
+        pos = nx.spring_layout(G)
+        nx.draw_networkx(G, pos, with_labels=True, node_size=500, node_color='lightblue', font_size=10)
+        plt.title('Montículo')
+        plt.axis('off')
+        st.pyplot(plt)
 
 
    
@@ -109,8 +133,8 @@ def ejercicio2():
     if user_input:
         numbers = [int(num.strip()) for num in user_input.split(',')]
 
-    # Mostrar los números ingresados
-    st.write("Números ingresados:", numbers)
+        # Mostrar los números ingresados
+        st.write("Números ingresados:", numbers)
 
     if numbers:
         # Construir un heap a partir de los números ingresados
@@ -140,12 +164,10 @@ def ejercicio3():
     opcion = st.selectbox(
 
        "2. 3) Crear una lista de actividades o tareas numeradas por prioridad con monticulos e imprimir la tarea mas prioritaria (la numero 1) y la menos prioriatia (la que tenga mayor numero)",
-        ("-", "Mostrar solucion")
+        ("-", "Mostrar solución")
     )
     if opcion == "Mostrar solución":
-        code = '''
-    
-        import heapq
+        code = '''import heapq
 
         #creo una lista
         h = []
@@ -160,10 +182,8 @@ def ejercicio3():
         print(h)
 
         #imprimo el menor elemento de la lista
-        print(heapq.heappop(h))
+        print(heapq.heappop(h))'''
 
-
-        '''
         st.code(code, language='python')
 
     st.write( "<h5>Ejemplo de Ejercicio 3</h5>",unsafe_allow_html=True )
@@ -179,8 +199,8 @@ def ejercicio3():
     if inputUsuario:
         tareasPendientes = [tarea.strip() for tarea in inputUsuario.split('.')]
 
-    # Mostrar los números ingresados
-    st.write("Tareas ingresadas:", tareasPendientes)
+        # Mostrar los números ingresados
+        st.write("Tareas ingresadas:", tareasPendientes)
 
     if tareasPendientes:
         heapq.heapify(tareasPendientes)
@@ -192,3 +212,36 @@ def ejercicio3():
         MenorPrioridad = heapq.nlargest(1, tareasPendientes)
 
         st.write("Tarea menos prioritaria:", MenorPrioridad)
+
+        visualizar_grafo(tareasPendientes)
+
+def visualizar_grafo(tareas):
+    G = nx.DiGraph()
+
+    # Agrega nodos al grafo
+    for tarea in tareas:
+        id_nodo, etiqueta_nodo = tarea.split(',')
+        G.add_node(id_nodo, label=etiqueta_nodo.strip())
+
+    # Agrega arcos al grafo
+    for i in range(len(tareas) - 1):
+        id_nodo1, _ = tareas[i].split(',')
+        id_nodo2, _ = tareas[i + 1].split(',')
+        G.add_edge(id_nodo1, id_nodo2)
+
+    # Dibuja el grafo
+    pos = nx.spring_layout(G)
+    etiquetas = nx.get_node_attributes(G, 'label')
+    plt.figure(figsize=(8, 6))
+    nx.draw_networkx(G, pos, with_labels=True, node_size=1000, node_color='lightblue', font_size=12)
+    nx.draw_networkx_labels(G, pos, labels=etiquetas)
+    plt.title('Tareas y Relaciones')
+    plt.axis('off')
+
+    # Convierte la figura en un objeto de bytes
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+
+    # Muestra la imagen en Streamlit
+    st.image(buf)
