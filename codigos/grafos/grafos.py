@@ -1,5 +1,4 @@
 import streamlit as st
-import matplotlib.pyplot as plt
 from codigos.grafos.rbGraphs import *
 
 

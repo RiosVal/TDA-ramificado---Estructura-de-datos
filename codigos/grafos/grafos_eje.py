@@ -132,10 +132,6 @@ def ejercicio2():
         st.code(code, language='python')
 
 
-import streamlit as st
-import networkx as nx
-import matplotlib.pyplot as plt
-
 def encontrar_camino_mas_corto():
     opcion = st.selectbox(
         "2. Gráfica del ejercicio",
