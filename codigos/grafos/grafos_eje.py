@@ -1,7 +1,9 @@
 import streamlit as st
+import heapq
 import networkx as nx
 import matplotlib.pyplot as plt
 from codigos.grafos.rbGraphs import *
+
 
 def ejercicio1():
     opcion = st.selectbox(
@@ -45,10 +47,6 @@ def ejercicio1():
                     del self.nodos[n][nodo]
 '''
         st.code(code, language='python')
-
- 
-
-
 
 def graficar_comunicacion_redes():
     opcion = st.selectbox(
@@ -134,23 +132,23 @@ def ejercicio2():
         st.code(code, language='python')
 
 
-
-
+import streamlit as st
+import networkx as nx
+import matplotlib.pyplot as plt
 
 def encontrar_camino_mas_corto():
     opcion = st.selectbox(
-        "2.Grafica del ejercicio",
+        "2. Gráfica del ejercicio",
         ("-", "Mostrar solución")
     )
-    if opcion == "Mostrar solución":
-    
-        # Crea un grafo de ejemplo
-        grafo = nx.Graph()
-        grafo.add_edge('A', 'B', weight=3)
-        grafo.add_edge('B', 'C', weight=2)
-        grafo.add_edge('C', 'D', weight=4)
-        grafo.add_edge('A', 'D', weight=5)
+    grafo = nx.Graph()
+    grafo.add_edge('A', 'B', weight=3)
+    grafo.add_edge('B', 'C', weight=2)
+    grafo.add_edge('C', 'D', weight=4)
+    grafo.add_edge('A', 'D', weight=5)
+    pos = nx.spring_layout(grafo)  # Calcula la disposición de los nodos
 
+    if opcion == "Mostrar solución":
         # Valores de ejemplo para los nodos iniciales y finales
         nodo_inicial_ejemplo = 'A'
         nodo_final_ejemplo = 'D'
@@ -168,7 +166,7 @@ def encontrar_camino_mas_corto():
             # Dibuja el grafo inicial
             plt.figure(figsize=(10, 5))
             plt.subplot(1, 2, 1)
-            nx.draw(grafo, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
+            nx.draw(grafo, pos, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
             plt.title("Grafo inicial")
             plt.axis('off')
 
@@ -176,11 +174,12 @@ def encontrar_camino_mas_corto():
             plt.subplot(1, 2, 2)
             node_colors = ['lightblue' if nodo in camino else 'gray' for nodo in grafo.nodes]
             edge_colors = ['red' if (nodo1, nodo2) in zip(camino, camino[1:]) else 'gray' for nodo1, nodo2 in grafo.edges]
-            nx.draw(grafo, with_labels=True, node_color=node_colors, node_size=500, font_size=10, edge_color=edge_colors, linewidths=1)
+            nx.draw(grafo, pos, with_labels=True, node_color=node_colors, node_size=500, font_size=10, edge_color=edge_colors, linewidths=1)
             plt.title("Grafo con camino más corto resaltado")
             plt.axis('off')
 
             st.pyplot(plt)
+
 encontrar_camino_mas_corto()
 
 
@@ -226,6 +225,7 @@ class GrafoComunicacion:
 '''
         st.code(code, language='python')
 
+
 def encontrar_componentes_conectados():
     opcion = st.selectbox(
         "3.Grafica del ejercicio",
@@ -266,9 +266,82 @@ def encontrar_componentes_conectados():
 
         # Mostrar el grafo
         st.pyplot(plt)
-
-
 # Ejecutar la función
 encontrar_componentes_conectados()
-       
-        
+
+def servicio():
+    opcion = st.selectbox(
+        "Mostrar gráfico",
+        ("-", "Mostrar solución")
+    )
+    if opcion == "Mostrar solución":
+        # Crear el grafo vacío
+        G = nx.Graph()
+
+        # Agregar el nodo de servicio técnico
+        G.add_node("serviciotécnico")
+
+        # Obtener la lista de letras ingresadas por el usuario
+        letras = st.text_input("Ingrese las letras separadas por espacios").split()
+
+        # Crear un heap de prioridad para almacenar las aristas
+        heap = []
+
+        # Agregar las aristas al heap
+        for letra in letras:
+            distancia = st.number_input(f"Ingrese la distancia desde 'serviciotécnico' hasta '{letra}'", value=0, min_value=0)
+            heapq.heappush(heap, (distancia, letra))
+
+        # Verificar si se ingresaron aristas
+        if heap:
+            # Encontrar la arista más corta
+            distancia_minima, nodo_siguiente = heapq.heappop(heap)
+
+            # Agregar la arista más corta al grafo
+            G.add_edge("serviciotécnico", nodo_siguiente)
+
+            # Actualizar el nodo actual
+            nodo_actual = nodo_siguiente
+
+            # Guardar el primer nodo encontrado
+            primeroN = nodo_actual
+
+            # Lista para almacenar los nodos recorridos
+            nodos_recorridos = ["serviciotécnico", nodo_actual]
+
+            # Buscar otras aristas con la misma distancia mínima desde 'serviciotécnico'
+            while heap and heap[0][0] == distancia_minima:
+                _, nodo_siguiente = heapq.heappop(heap)
+                G.add_edge("serviciotécnico", nodo_siguiente)
+                nodos_recorridos.append(nodo_siguiente)
+
+            # Continuar buscando la siguiente arista más corta desde los nodos actuales
+            while heap:
+                # Reiniciar el heap para la búsqueda desde los nodos actuales
+                heapq.heapify(heap)
+
+                # Encontrar la siguiente arista más corta desde el nodo actual
+                distancia_minima, nodo_siguiente = heapq.heappop(heap)
+                G.add_edge(nodo_actual, nodo_siguiente)
+                nodos_recorridos.append(nodo_siguiente)
+
+                # Actualizar el nodo actual
+                nodo_actual = nodo_siguiente
+
+            # Mostrar los nodos recorridos
+            st.write("Camino del empleado:")
+            for i, nodo in enumerate(nodos_recorridos):
+                st.write(f"{i+1}. {nodo}")
+
+            # Dibujar el grafo (si se seleccionó la opción correspondiente)
+            if opcion == "Mostrar solución":
+                plt.figure(figsize=(6, 6))
+                pos = nx.spring_layout(G)
+                nx.draw_networkx(G, pos, with_labels=True, node_color='skyblue', node_size=800, font_size=12, edge_color='gray', width=2)
+                st.pyplot(plt)
+
+        else:
+            st.write("No se ingresaron aristas")
+
+# Ejecutar la función
+servicio()

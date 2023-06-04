@@ -45,48 +45,53 @@ if __name__ == "__main__":
 def in_vec():
     st.subheader("Matriz vector")
     st.markdown(
-    """   
-    La matriz de un vector es una estructura rectangular compuesta por una sola columna o una sola fila de elementos. Esta matriz se utiliza para almacenar y manipular un conjunto de valores ordenados de forma lineal.
-    """ 
+        """
+        La matriz de un vector es una estructura rectangular compuesta por una sola columna o una sola fila de elementos. Esta matriz se utiliza para almacenar y manipular un conjunto de valores ordenados de forma lineal.
+        """
     )
     # Solicitar al usuario el tamaño del vector
-    n = st.number_input("Ingrese el número de nodos del grafo", min_value=1, max_value=10, step=1)
-    
-    # Solicitar al usuario el tamaño del vector
-    n = st.number_input("Ingrese el tamaño del vector", min_value=1, max_value=10, step=1)
+    n = st.number_input("Ingrese el número de nodos del grafo", min_value=1, max_value=10, step=1, key="numero_nodos")
 
-  
     vector = []
 
-     # Solicitar al usuario ingresar los elementos del vector
+    # Solicitar al usuario ingresar los elementos del vector
     for i in range(n):
-        
         key = f"vector-{i}"
         valor = st.number_input(f"Elemento {i}", key=key)
-       
         vector.append(valor)
 
-
-  
-   
-   
     grafo = nx.Graph()
     grafo.add_nodes_from(range(n))
     # Verificar elementos repetidos en el vector y agregar aristas al grafo
     for i in range(n):
-        for j in range(i+1, n):
+        for j in range(i + 1, n):
             if vector[i] == vector[j]:
                 grafo.add_edge(i, j)
 
+    # Verificar si el grafo tiene aristas
+    if grafo.number_of_edges() == 0:
+        st.write("No se encontraron aristas en el grafo. Verifique los elementos ingresados.")
+
     # Visualizar el grafo utilizando Matplotlib y NetworkX
+    pos = nx.spring_layout(grafo)  # Layout del grafo
     plt.figure(figsize=(6, 4))
-    nx.draw(grafo, with_labels=True, node_color='lightblue', node_size=500, font_size=10, edge_color='gray', linewidths=1)
+    nx.draw(
+        grafo,
+        pos=pos,
+        with_labels=True,
+        node_color="lightblue",
+        node_size=500,
+        font_size=10,
+        edge_color="gray",
+        linewidths=1,
+    )
     plt.title("Grafo")
-    plt.axis('off')
+    plt.axis("off")
     st.pyplot(plt)
 
-'''if __name__ == "__main__":
-    in_vector()'''
+
+if __name__ == "__main__":
+    in_vec()
 
 
 
