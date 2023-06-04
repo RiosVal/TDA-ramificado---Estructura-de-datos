@@ -4,7 +4,7 @@ from codigos.grafos.grafos import *
 from codigos.grafos.rbGraphs import *
 from codigos.grafos.grafos_eje import *
 from codigos.grafos.grafos_matriz import *
-
+from codigos.grafos.aplicado import *
 
 
 def intro():
@@ -46,6 +46,7 @@ def importante_saber():
         st.markdown("- <b> Etiqueta de arista:</b> son aquellos en los que las aristas tienen una etiqueta o peso asociado que representa alguna característica o propiedad específica ",unsafe_allow_html=True)
         st.markdown("- <b> Conexo:</b> todos sus vertices tine una relacion o una forma de comunicarse entre si ya se simple o relacionandose a traves de uno a más aristas",unsafe_allow_html=True)
     st.image("images/grafos/partes grafos.png")
+
 def tabs():
     tab1,tab2,tab3,tab4,tab5,tab6= st.tabs(["Grafos no dirigidos","Grafos dirigidos"," Camino hamiltoneano","Camino euleriano","Grafos aciclico","Grafos ponderados"])
 
@@ -177,7 +178,7 @@ def definciones():
     st.image("images/grafos/Etiquetas.png")
 
     st.divider()
-    st.header("conexo")
+    st.header("Conexo")
     st.markdown(
     """
     En un grafo, se dice que es conexo si existe un camino entre cualquier par de nodos del grafo. En otras palabras, todos los nodos del grafo están conectados entre sí de alguna manera. Si hay al menos un par de nodos que no están conectados por ningún camino, entonces el grafo se considera no conexo. En un grafo no dirigido, la noción de conexidad implica que la relación de conexión es simétrica, es decir, si el nodo A está conectado con el nodo B, entonces el nodo B también está conectado con el nodo A.
@@ -185,7 +186,7 @@ def definciones():
     )   
 
     st.divider()
-    st.header("grafo dirigido y  grafo no dirigido")
+    st.subheader("Grafos dirigidos Grafos no dirigidos")
     st.markdown(
     """
         -Grafo dirigido: Un grafo dirigido, también conocido como digrafo, es un tipo de grafo donde las aristas tienen una dirección asociada. Esto significa que la conexión entre dos nodos va en una dirección específica, lo que implica que se puede viajar desde un nodo inicial a un nodo final siguiendo la dirección de las aristas. En un grafo dirigido, las aristas se representan con flechas o arcos para indicar la dirección.
@@ -193,9 +194,13 @@ def definciones():
         -Grafo no dirigido: Un grafo no dirigido es un tipo de grafo donde las aristas no tienen una dirección asociada. En otras palabras, la conexión entre dos nodos es bidireccional, lo que significa que se puede viajar en ambas direcciones entre los nodos sin restricciones. En un grafo no dirigido, las aristas se representan con líneas sin flechas para indicar que la conexión es simétrica.
     """
     )
-    st.subheader("conclusiones")
+
+
+    st.divider()
+    st.subheader("Conclusiones")
     st.markdown(
-    """la principal diferencia entre un grafo dirigido y un grafo no dirigido radica en la dirección de las aristas: en un grafo dirigido, las aristas tienen una dirección específica, mientras que en un grafo no dirigido, las aristas no tienen dirección y la conexión es bidireccional.
+    """
+    la principal diferencia entre un grafo dirigido y un grafo no dirigido radica en la dirección de las aristas: en un grafo dirigido, las aristas tienen una dirección específica, mientras que en un grafo no dirigido, las aristas no tienen dirección y la conexión es bidireccional.
     """
     )
 
@@ -225,12 +230,18 @@ def ejercicios_basicos():
             aprender es haciéndolo tú mismo.
     """
     )
+    
     ejercicio1()
     graficar_comunicacion_redes()
     ejercicio2()
     encontrar_camino_mas_corto()
     ejercicio3()
     encontrar_componentes_conectados()
+    code_atender_servicio()
+    servicio()
+
+
+     
 
 def page():
     #menu donde el  usrauario podra ver los temas y codigos que tiene que ver con un grafo#
@@ -242,33 +253,27 @@ def page():
             '',
             'Definiciones importantes',
             'Usos y reglas',
-            'Información detallada',
-            'Codigo de los grafos',
-            'Codigo de dijkstra',
-            'Codigo de matriz de adyacencia',
-            'Codigo de matriz de vectores',
-            'Codigo de matriz de lista',
-            'Ejercicios básicos de comprensión'
+            'Codigos',
+            'Ejercicio de aplicación'
         )
     )
     #opciones delm menu
     if opcion == 'Definiciones importantes':
         importante_saber()
         tabs()
-    elif opcion == 'Usos y reglas':
-        usos_reglas()
-    elif opcion == 'Información detallada':
         definciones()
-    elif opcion == 'Codigo de los grafos':
+
+    elif opcion == 'Usos y reglas':
+       usos_reglas()
+       
+    elif opcion == 'Codigos':
         codigos()
-    elif opcion == 'Codigo de dijkstra':
         dijkstra()
-    elif opcion == 'Codigo de matriz de adyacencia':
         adye()
-    elif opcion == 'Codigo de matriz de vectores':
         vec()
-    elif opcion == 'Codigo de matriz de lista':
         matriz()
-    elif opcion == 'Ejercicios básicos de comprensión':
+    elif opcion == 'Ejercicio de aplicación':
         ejercicios_basicos()
+    #elif opcion == 'Ejercicio de aplicación':
+        #ejercicio_de_aplicacion()
 page()
