@@ -20,5 +20,5 @@ Si lo que quieres es descargar el codigo en un archivo .zip o clonar el reposito
 ¡SI YA TIENES EL ENTORNO VIRTUAL CREADO DENTRO DE TU CARPETA!
 1. Abre el cmd de tu computador
 2. Accede a la carpeta donde está el proyecto y todos los códigos con el comando cd "ruta de acceso de la carpeta"
-3. Si no tienes las librerias necesarias para que el proyecto funcione, instalalas
+3. Si no tienes las librerias necesarias para que el proyecto funcione, ¡instalalas!
 4. Corre el programa pegando el siguiente comando: streamlit run homepage.py
