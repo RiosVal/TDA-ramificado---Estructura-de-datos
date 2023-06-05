@@ -1,79 +1,117 @@
 import streamlit as st
 from codigos.monticulos.heap import *
 import heapq
+import io
+import matplotlib.pyplot as plt
 
 def ejercicio1():
 
     opcion = st.selectbox(
-        "1. En una matrix implementa operaciones de inserccion, eliminacion y una operacion para obtener el maximo",
+        "1. Cree una cola de monticulo utilizando el módulo heapq en Python y realiza varias operaciones, como convertir una lista en un montón, agregar un nuevo valor al montón, eliminar el elemento más pequeño del montón, obtener los n elementos más pequeños y los n más grandes de el montón",
         ("-", "Mostrar solución")
     )
     if opcion == "Mostrar solución":
         code = '''
-        class Monticulo:
-        def __init__(self):
-            self.heap = []
-        
-        def insert(self, value):
-            self.heap.append(value)
-            self._sift_up(len(self.heap) - 1)
-        
-        def delete(self):
-            if not self.heap:
-                return None
-            self._swap(0, len(self.heap) - 1)
-            max_value = self.heap.pop()
-            self._sift_down(0)
-            return max_value
-        
-        def get_max(self):
-            if not self.heap:
-                return None
-            return self.heap[0]
-        
-        def _sift_up(self, index):
-            parent = (index - 1) // 2
-            if parent >= 0 and self.heap[parent] < self.heap[index]:
-                self._swap(parent, index)
-                self._sift_up(parent)
-        
-        def _sift_down(self, index):
-            left_child = 2 * index + 1
-            right_child = 2 * index + 2
-            largest = index
-            
-            if (
-                left_child < len(self.heap) and
-                self.heap[left_child] > self.heap[largest]
-            ):
-                largest = left_child
-            
-            if (
-                right_child < len(self.heap) and
-                self.heap[right_child] > self.heap[largest]
-            ):
-                largest = right_child
-            
-            if largest != index:
-                self._swap(index, largest)
-                self._sift_down(largest)
-        
-        def _swap(self, i, j):
-            self.heap[i], self.heap[j] = self.heap[j], self.heap[i]
+                import heapq
 
+        # Initialize a list with some values
+        values = [5, 1, 3, 7, 4, 2]
 
-    # Ejemplo de uso
-    monticulo = Monticulo()
-    monticulo.insert(5)
-    monticulo.insert(10)
-    monticulo.insert(3)
-    print(monticulo.get_max())  # Debe imprimir 10
-    print(monticulo.delete())   # Debe imprimir 10
-    print(monticulo.get_max())  # Debe imprimir 5
+        # Convert the list into a heap
+        heapq.heapify(values)
+
+        # Print the heap
+        print("Heap:", values)
+
+        # Add a new value to the heap
+        heapq.heappush(values, 6)
+
+        # Print the updated heap
+        print("Heap after push:", values)
+
+        # Remove and return the smallest element from the heap
+        smallest = heapq.heappop(values)
+
+        # Print the smallest element and the updated heap
+        print("Smallest element:", smallest)
+        print("Heap after pop:", values)
+
+        # Get the n smallest elements from the heap
+        n_smallest = heapq.nsmallest(3, values)
+
+        # Print the n smallest elements
+        print("Smallest 3 elements:", n_smallest)
+
+        # Get the n largest elements from the heap
+        n_largest = heapq.nlargest(2, values)
+
+        # Print the n largest elements
+        print("Largest 2 elements:", n_largest)
 
     '''
         st.code(code, language='python')
+    
 
+    st.write( "<h4>Ejemplo de Ejercicio 1</h4>",unsafe_allow_html=True )
+
+    numeros = []
+
+    inputuser = st.text_input("Ingresa una lista de numeros separados por comas ( , )")
+
+    if inputuser:
+        numeros = [int(num.strip()) for num in inputuser.split(',')]
+
+        # Mostrar los números ingresados
+        st.write("Números ingresados:", numeros)
+
+    if numeros:
+        # Construir un heap a partir de los números ingresados
+        heapq.heapify(numeros)
+
+        maspequeño = heapq.heappop(numeros)
+
+        st.write("El numero mas pequeño es:", maspequeño)
+
+        st.write("Monticulo despues del pop", numeros)
+
+        p = st.number_input("Ingrese el número de elementos más pequeños", min_value=1, max_value=len(numeros),
+                                value=1, step=1)
+        
+        N_pequeños = heapq.nsmallest(p, numeros)
+
+        st.write(f"{p} elementos mas pequeños:", N_pequeños)
+
+        g = st.number_input("Ingrese el número de elementos más grandes", min_value=1, max_value=len(numeros),
+                                value=1, step=1)
+        
+        N_grande = heapq.nlargest(g, numeros)
+
+        st.write(f"{g} elementos más grandes:", N_grande)
+
+         # Crear el grafo
+        G = nx.DiGraph()
+
+        # Agregar nodos para los números ingresados
+        for i, num in enumerate(numeros):
+            G.add_node(num)
+
+        # Agregar aristas para las relaciones del montículo
+        for i, num in enumerate(numeros):
+            if 2 * i + 1 < len(numeros):
+                G.add_edge(num, numeros[2 * i + 1])
+            if 2 * i + 2 < len(numeros):
+                G.add_edge(num, numeros[2 * i + 2])
+
+        # Dibujar el grafo
+        plt.figure(figsize=(8, 6))
+        pos = nx.spring_layout(G)
+        nx.draw_networkx(G, pos, with_labels=True, node_size=500, node_color='lightblue', font_size=10)
+        plt.title('Montículo')
+        plt.axis('off')
+        st.pyplot(plt)
+
+
+   
 def ejercicio2():
     st.subheader("Aplicación de monticulos (HEAP)")
     st.write("<h5>Explicación:</h5>",unsafe_allow_html=True)
@@ -90,13 +128,13 @@ def ejercicio2():
 
     # Obtener la entrada del usuario
     user_input = st.text_input("Ingrese una lista de números separados por comas")
-
+  
     # Convertir la entrada del usuario en una lista de números
     if user_input:
         numbers = [int(num.strip()) for num in user_input.split(',')]
 
-    # Mostrar los números ingresados
-    st.write("Números ingresados:", numbers)
+        # Mostrar los números ingresados
+        st.write("Números ingresados:", numbers)
 
     if numbers:
         # Construir un heap a partir de los números ingresados
@@ -117,35 +155,3 @@ def ejercicio2():
                                 value=1, step=1)
             smallest = heapq.nsmallest(k, numbers)
             st.write(f"{k} elementos más pequeños:", smallest)
-
-
-def ejercicio3():
-    opcion = st.selectbox(
-       '2.Calcular el enesimo de una secuencia Fibonacci',
-        ("-", "Mostrar solución")
-    )
-    if opcion == "Mostrar solución":
-        code = '''
-         def fibonacci(n):
-    if n <= 0:
-        return None
-    if n == 1:
-        return 0
-    if n == 2:
-        return 1
-    
-    a, b = 0, 1
-    for _ in range(3, n + 1):
-        a, b = b, a + b
-    
-    return b
-
-# Ejemplo de uso
-print(fibonacci(1))   # Debe devolver 0
-print(fibonacci(5))   # Debe devolver 3
-print(fibonacci(10))  # Debe devolver 34
-
-
-'''
-        st.code(code, language='python')
-    

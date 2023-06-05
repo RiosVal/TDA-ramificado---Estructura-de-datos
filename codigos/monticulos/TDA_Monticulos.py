@@ -1,76 +1,66 @@
-import streamlit as st
+class Monticulo:
+    def __init__(self):
+        self.elementos = []  # Lista para almacenar los elementos del montículo
 
-class TdaMonticulo:
-    def __init__(self, tamaño):
-        self.heap = [None] * tamaño
-        self.size = 0
+    def esta_vacio(self):
+        return len(self.elementos) == 0  # Verificar si el montículo está vacío
 
-    def agregar(self, dato):
-        if self.size >= len(self.heap):
-            # El montículo está lleno
-            return
-        self.heap[self.size] = dato
-        self.flotar(self.size)
-        self.size += 1
+    def insertar(self, elemento, prioridad):
+        self.elementos.append((elemento, prioridad))  # Agregar el elemento al final de la lista
+        self.subir_elemento(len(self.elementos) - 1)  # Realizar el proceso de subir el elemento en el montículo
 
-    def quitar(self):
-        if self.size == 0:
-            # El montículo está vacío
+    def eliminar_minimo(self):
+        if self.esta_vacio():
             return None
-        dato = self.heap[0]
-        self.size -= 1
-        self.heap[0] = self.heap[self.size]
-        self.hundir(0)
-        return dato
 
-    def flotar(self, índice):
-        padre = (índice - 1) // 2
-        while índice > 0 and self.heap[índice] > self.heap[padre]:
-            self.heap[índice], self.heap[padre] = self.heap[padre], self.heap[índice]
-            índice = padre
-            padre = (índice - 1) // 2
+        minimo = self.elementos[0]  # Obtener el elemento mínimo (raíz del montículo)
+        ultimo = self.elementos.pop()  # Eliminar el último elemento de la lista
 
-    def hundir(self, índice):
-        hijo_izquierdo = 2 * índice + 1
-        hijo_derecho = 2 * índice + 2
-        índice_mayor = índice
+        if not self.esta_vacio():
+            self.elementos[0] = ultimo  # Colocar el último elemento en la raíz
+            self.bajar_elemento(0)  # Realizar el proceso de bajar el elemento en el montículo
 
-        if hijo_izquierdo < self.size and self.heap[hijo_izquierdo] > self.heap[índice_mayor]:
-            índice_mayor = hijo_izquierdo
-        if hijo_derecho < self.size and self.heap[hijo_derecho] > self.heap[índice_mayor]:
-            índice_mayor = hijo_derecho
+        return minimo[0]  # Devolver el elemento mínimo
 
-        if índice_mayor != índice:
-            self.heap[índice], self.heap[índice_mayor] = self.heap[índice_mayor], self.heap[índice]
-            self.hundir(índice_mayor)
+    def subir_elemento(self, indice):
+        while indice > 0:
+            indice_padre = (indice - 1) // 2  # Calcular el índice del padre
 
-    def montículo_vacio(self):
-        return self.size == 0
+            if self.elementos[indice][1] >= self.elementos[indice_padre][1]:
+                break  # Si la prioridad del elemento es mayor o igual que la del padre, finalizar
 
-    def montículo_lleno(self):
-        return self.size == len(self.heap)
+            # Intercambiar el elemento con su padre
+            self.elementos[indice], self.elementos[indice_padre] = self.elementos[indice_padre], self.elementos[indice]
+            indice = indice_padre  # Actualizar el índice con el del padre
 
-    def tamaño(self):
-        return self.size
+    def bajar_elemento(self, indice):
+        tamanio = len(self.elementos)
 
-    @classmethod
-    def monticulizar(cls, elementos):
-        tamaño = len(elementos)
-        monticulo = cls(tamaño)
-        monticulo.heap = elementos
-        monticulo.size = tamaño
+        while indice < tamanio:
+            hijo_izquierdo = 2 * indice + 1  # Calcular el índice del hijo izquierdo
+            hijo_derecho = 2 * indice + 2  # Calcular el índice del hijo derecho
+            indice_minimo = indice
 
-        for i in range(tamaño // 2 - 1, -1, -1):
-            monticulo.hundir(i)
+            if hijo_izquierdo < tamanio and self.elementos[hijo_izquierdo][1] < self.elementos[indice_minimo][1]:
+                indice_minimo = hijo_izquierdo  # Actualizar el índice mínimo si el hijo izquierdo tiene una prioridad menor
 
-        return monticulo
+            if hijo_derecho < tamanio and self.elementos[hijo_derecho][1] < self.elementos[indice_minimo][1]:
+                indice_minimo = hijo_derecho  # Actualizar el índice mínimo si el hijo derecho tiene una prioridad menor
+
+            if indice_minimo == indice:
+                break  # Si el índice mínimo es igual al índice actual, finalizar
+
+            # Intercambiar el elemento con el hijo de menor prioridad
+            self.elementos[indice], self.elementos[indice_minimo] = self.elementos[indice_minimo], self.elementos[indice]
+            indice = indice_minimo  # Actualizar el índice con el del hijo de menor prioridad
+
+    def obtener_minimo(self):
+        if self.esta_vacio():
+            return None
+
+        return self.elementos[0][0]  # Devolver el elemento mínimo
+
+    def generar_lista_priorizada(self):
+        lista_priorizada = sorted(self.elementos, key=lambda x: (x[1], x[0]['hora'], x[0]['fecha']))  # Ordenar los elementos por prioridad, hora y fecha
+        return [elemento[0] for elemento in lista_priorizada]  # Devolver solo los elementos sin la prioridad
     
-    def imprimir_heap(self): #Imprimir monticulo
-        print(self.heap[:self.size])
-
-    def imprimir_heap_streamlit(self):#Imprimir monticulo compatible con STREAMLIS
-        heap = self.heap[:self.size]
-
-        st.write("Elementos del montículo:")
-        for i, avion in heap:
-            st.write(f"{i})  Tipo: {avion[1]}   -   Prioridad: {avion[1]}")

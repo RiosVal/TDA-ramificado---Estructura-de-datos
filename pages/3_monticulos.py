@@ -1,7 +1,7 @@
 import streamlit as st
 from codigos.monticulos.monticulos import *
 from codigos.monticulos.ejercicios import *
-from codigos.monticulos.rbHeaps import *
+from codigos.monticulos.ejercicioGrafico import *
 from streamlit_extras.switch_page_button import switch_page
 from codigos.monticulos.ejercicioAplicativo import *
 
@@ -163,7 +163,7 @@ def ejercicios():
     #Se hace el llamado de los ejercicios ubicados en ./codigos/monticulos/ejercicios.py para mostrarlos en pantalla
     ejercicio1()
     ejercicio2()
-    ejercicio3()
+    ejercicioGrafico()
 
 
 
@@ -253,21 +253,17 @@ def page():
         (
             '',
             'Definiciones importantes',
-            'Monticulos MaxMin',
             'Tipos de monticulos',
-            'Aplicacion TDA',
             'Ejercicios básicos de comprensión',
             'Ejercicio de aplicación'
         )
     )
     if opcion == 'Definiciones importantes':
         importante_saber()
-        diferencias()
-    elif opcion =='Monticulos MaxMin':
-        monticulosMaxMin()
+        diferencias()     
     elif opcion == 'Tipos de monticulos':
+        monticulosMaxMin()
         tipos()
-    elif opcion == 'Aplicacion TDA':
         tda_monticulos()
     elif opcion == 'Ejercicios básicos de comprensión':
         ejercicios()
