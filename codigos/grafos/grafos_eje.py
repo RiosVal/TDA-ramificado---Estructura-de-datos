@@ -265,6 +265,7 @@ def encontrar_componentes_conectados():
 # Ejecutar la función
 encontrar_componentes_conectados()
 
+
 def servicio():
     opcion = st.selectbox(
         "Mostrar gráfico",
@@ -275,7 +276,7 @@ def servicio():
         G = nx.Graph()
 
         # Agregar el nodo de servicio técnico
-        G.add_node("serviciotécnico")
+        G.add_node("Empresa")
 
         # Obtener la lista de letras ingresadas por el usuario
         letras = st.text_input("Ingrese las letras separadas por espacios").split()
@@ -285,7 +286,7 @@ def servicio():
 
         # Agregar las aristas al heap
         for letra in letras:
-            distancia = st.number_input(f"Ingrese la distancia desde 'serviciotécnico' hasta '{letra}'", value=0, min_value=0)
+            distancia = st.number_input(f"Ingrese la distancia desde 'serviciotécnico' hasta '{letra}'", value=0.0, min_value=0.0)
             heapq.heappush(heap, (distancia, letra))
 
         # Verificar si se ingresaron aristas
@@ -294,7 +295,7 @@ def servicio():
             distancia_minima, nodo_siguiente = heapq.heappop(heap)
 
             # Agregar la arista más corta al grafo
-            G.add_edge("serviciotécnico", nodo_siguiente)
+            G.add_edge("Empresa", nodo_siguiente)
 
             # Actualizar el nodo actual
             nodo_actual = nodo_siguiente
@@ -303,12 +304,12 @@ def servicio():
             primeroN = nodo_actual
 
             # Lista para almacenar los nodos recorridos
-            nodos_recorridos = ["serviciotécnico", nodo_actual]
+            nodos_recorridos = ["Empresa", nodo_actual]
 
             # Buscar otras aristas con la misma distancia mínima desde 'serviciotécnico'
             while heap and heap[0][0] == distancia_minima:
                 _, nodo_siguiente = heapq.heappop(heap)
-                G.add_edge("serviciotécnico", nodo_siguiente)
+                G.add_edge("Empresa", nodo_siguiente)
                 nodos_recorridos.append(nodo_siguiente)
 
             # Continuar buscando la siguiente arista más corta desde los nodos actuales
@@ -325,7 +326,7 @@ def servicio():
                 nodo_actual = nodo_siguiente
 
             # Mostrar los nodos recorridos
-            st.write("Camino del empleado:")
+            st.write("La ruta que debe recorrer es..")
             for i, nodo in enumerate(nodos_recorridos):
                 st.write(f"{i+1}. {nodo}")
 
