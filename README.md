@@ -1,4 +1,6 @@
-Este proyecto utiliza streamlit, por lo tanto para que funcione debes seguir los siguientes pasos en windows:
+PUEDES VER LA APP EN LINEA HACIENDO CLICK EN ESTE ENLACE: https://proyectotdaramificado.streamlit.app/
+
+Si lo que quieres es descargar el codigo en un archivo .zip o clonar el repositorio, debs tener en cuenta que, este proyecto utiliza streamlit, por lo tanto para que funcione debes seguir los siguientes pasos en windows:
 
 ¡SI NO TIENES UN ENTORNO VIRTUAL CREADO!
 1. Clona el repositorio o descarga el archivo .zip en tu computador
@@ -18,5 +20,5 @@ Este proyecto utiliza streamlit, por lo tanto para que funcione debes seguir los
 ¡SI YA TIENES EL ENTORNO VIRTUAL CREADO DENTRO DE TU CARPETA!
 1. Abre el cmd de tu computador
 2. Accede a la carpeta donde está el proyecto y todos los códigos con el comando cd "ruta de acceso de la carpeta"
-3. Si no tienes las librerias necesarias para que el proyecto funcione, instalalas
+3. Si no tienes las librerias necesarias para que el proyecto funcione, ¡instalalas!
 4. Corre el programa pegando el siguiente comando: streamlit run homepage.py
