@@ -18,7 +18,7 @@ def intro():
              Los vértices a veces también se denominan nodos y los bordes son líneas o arcos que conectan dos nodos en el grafo. 
              Más formalmente, 
              un grafo se compone de un conjunto de vértices 
-             (V) y un conjunto de aristas (E). El grafo se denota por G(E, V).
+             (V) y un conjunto de aristas (E). El grafo se denota por G(E, V) [2].
 
          </p>
 
@@ -32,19 +32,19 @@ def importante_saber():
     col1, col2 = st.columns(2)
 
     # with col1: 
-    #     st.markdown("- <b> Vertices:</b> son las unidades fundamentales del grafo. A veces, los vértices también se conocen como vértices o nodos. Cada nodo/vértice se puede etiquetar o no etiquetar.", unsafe_allow_html=True)
+    #     st.markdown("- <b> vértices: </b> son las unidades fundamentales del grafo. A veces, los vértices también se conocen como vértices o nodos. Cada nodo/vértice se puede etiquetar o no etiquetar.", unsafe_allow_html=True)
     #     st.markdown("- <b> Adyacencia: </b> ", unsafe_allow_html=True)
     with col1:
-        st.markdown("- <b> Vertices:</b> son las unidades fundamentales del grafo. A veces, los vértices también se conocen como vértices o nodos. Cada nodo/vértice se puede etiquetar o no etiquetar.", unsafe_allow_html=True)
+        st.markdown("- <b> vértices: </b> son las unidades fundamentales del grafo. A veces, los vértices también se conocen como vértices o nodos. Cada nodo/vértice se puede etiquetar o no etiquetar.", unsafe_allow_html=True)
         st.markdown("- <b>Adyacencia:</b> Representa una lista de vertices ", unsafe_allow_html=True)
         st.markdown("- <b>Camino:</b> Es una secuencia de arcos, la cual cada extremo coincide con el inicio y el final", unsafe_allow_html=True)
         st.markdown("- <b>Longitud de camino:</b> Es el número de numero de aristas que la forman ",unsafe_allow_html=True)
 
 
     with col2:
-        st.markdown("- <b> Aristas: </b> Las aristas se dibujan o se usan para conectar dos nodos del gráfico. Se puede ordenar un par de nodos en un gráfico dirigido. Las aristas pueden conectar dos nodos cualesquiera de cualquier forma posible. Las aristas también se conocen como arcos. Cada arista se puede etiquetar/desetiquetar. </b>",unsafe_allow_html=True)
+        st.markdown("- <b> Aristas: </b> Las aristas se dibujan o se usan para conectar dos nodos del gráfico. Se puede ordenar un par de nodos en un gráfico dirigido. Las aristas pueden conectar dos nodos cualesquiera de cualquier forma posible. Las aristas también se conocen como arcos. Cada arista se puede etiquetar/des etiquetar. </b>",unsafe_allow_html=True)
         st.markdown("- <b> Etiqueta de arista:</b> son aquellos en los que las aristas tienen una etiqueta o peso asociado que representa alguna característica o propiedad específica ",unsafe_allow_html=True)
-        st.markdown("- <b> Conexo:</b> todos sus vertices tine una relacion o una forma de comunicarse entre si ya se simple o relacionandose a traves de uno a más aristas",unsafe_allow_html=True)
+        st.markdown("- <b> Conexo:</b> todos sus vértices tienen una relación o una forma de comunicarse entre si ya se simple o relacionados a través de uno a más aristas",unsafe_allow_html=True)
     st.image("images/grafos/partes grafos.png")
 
 def tabs():

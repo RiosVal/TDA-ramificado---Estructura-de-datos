@@ -4,7 +4,7 @@ from codigos.grafos.rbGraphs import *
 def code_atender_servicio():
     st.subheader("Actividad")
     opcion = st.selectbox(
-        "Se tiene un servicio tecnico (nodo de partida) al mismo tiempo este tiene un empleado (camino recorrido); este servicio tecnico debe realizar unos trabajos en varios puntos diferentes (nodos). Realiza un programa donde el empleado debe recorrer el camino mas corte  que hay",
+        "Se tiene un sistema de redes conectados con varios puntos de una ciudad; un trabajador hace mantenimientos a este sistema de redes y tiene que ir por todas las conexiones del sistema(nodos). Para encontrar el trayecto mas optimo se realiza un grafo teniendo en cuenta la distancia de cada nodo.",
         ("-", "Mostrar solución")
     )
     
@@ -59,6 +59,3 @@ def atender_servicio():
     print("El orden de atención de los clientes es:")'''
 
         st.code(code, language='python')
-
-
-

@@ -91,7 +91,7 @@ graficar_comunicacion_redes()
     
 def ejercicio2():
     opcion = st.selectbox(
-        "2. Crea una funcion para encontrar el camino mas corto de un grafo",
+        "2.Crea una funcion para encontrar el camino mas corto de un grafo",
         ("-", "Mostrar solución")
     )
     if opcion == "Mostrar solución":
@@ -134,7 +134,7 @@ def ejercicio2():
 
 def encontrar_camino_mas_corto():
     opcion = st.selectbox(
-        "2. Gráfica del ejercicio",
+        "2.Gráfica del ejercicio",
         ("-", "Mostrar solución")
     )
     grafo = nx.Graph()
@@ -181,7 +181,7 @@ encontrar_camino_mas_corto()
 
 def ejercicio3():
     opcion = st.selectbox(
-        '3. Crea una funcion que demuestre todos los componentes conectados dentro de un grafo',
+        '3.Crea una funcion que demuestre todos los componentes conectados dentro de un grafo',
         ("-", "Mostrar solución")
     )
     if opcion == "Mostrar solución":
@@ -231,13 +231,13 @@ def encontrar_componentes_conectados():
         st.write("Crear Grafo")
 
         # Obtener la lista de letras ingresadas por el usuario
-        letras = st.text_input("Ingrese las letras separadas por espacios").split()
+        letras_1 = st.text_input("Ingrese las letras separadas por espacios :)").split()
 
         # Crear un grafo vacío
         G = nx.Graph()
 
         # Agregar las letras como nodos
-        G.add_nodes_from(letras)
+        G.add_nodes_from(letras_1)
 
         st.write("Conexiones")
 
