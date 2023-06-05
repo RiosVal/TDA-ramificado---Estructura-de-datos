@@ -1,4 +1,6 @@
-Este proyecto utiliza streamlit, por lo tanto para que funcione debes seguir los siguientes pasos en windows:
+PUEDES VER LA APP EN LINEA HACIENDO CLICK EN ESTE ENLACE: https://proyectotdaramificado.streamlit.app/
+
+Si lo que quieres es descargar el codigo en un archivo .zip o clonar el repositorio, debs tener en cuenta que, este proyecto utiliza streamlit, por lo tanto para que funcione debes seguir los siguientes pasos en windows:
 
 ¡SI NO TIENES UN ENTORNO VIRTUAL CREADO!
 1. Clona el repositorio o descarga el archivo .zip en tu computador
